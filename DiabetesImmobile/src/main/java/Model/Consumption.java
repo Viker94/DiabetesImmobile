@@ -3,17 +3,17 @@ package Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Date;
 
 /**
- * Created by Marcin on 25.11.2016.
+ * Created by Marcin on 26.11.2016.
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Login {
+public class Consumption {
 
     private Long id;
-    private String login;
-    private String passwd;
-    private int type;
+    private Product product;
+    private Date date;
 }

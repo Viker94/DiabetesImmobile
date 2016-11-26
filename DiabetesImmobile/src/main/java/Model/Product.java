@@ -5,15 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Created by Marcin on 25.11.2016.
+ * Created by Marcin on 26.11.2016.
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Login {
+public class Product {
 
     private Long id;
-    private String login;
-    private String passwd;
-    private int type;
+    private String name;
+    private Double potassiumGrowth;
+    private Double waterGrowth;
 }

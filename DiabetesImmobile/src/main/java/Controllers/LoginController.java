@@ -1,23 +1,15 @@
-/**
+package Controllers; /**
  * Sample Skeleton for 'fxml/Login.fxml' Controller Class
  */
 
-package Controllers;
 
-import Model.Login;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
-import javax.swing.*;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class LoginController {
@@ -47,26 +39,9 @@ public class LoginController {
 
     @FXML
     void logIn(ActionEvent event) {
-
-        Configuration conf = new Configuration().configure();
-        SessionFactory factory = conf.buildSessionFactory();
-        Session session = factory.openSession();
-        Transaction tx = null;
-        tx = session.beginTransaction();
-        List logins = session.createQuery("FROM Login").list();
-        tx.commit();
-        session.close();
-        String log = loginField.getText();
-        String pass = passwdField.getText();
-        boolean zalogowano = false;
-        for(int i=0;i<logins.size();i++){
-            if((((Login)logins.get(i)).getLogin().equals(log))&&(((Login)logins.get(i)).getPasswd().equals(pass))){
-                JOptionPane.showMessageDialog(null,"udało sie zalogować jako id:"+((Login)logins.get(i)).getId());
-                zalogowano = true;
-                break;
-            }
-        }
-        if(!zalogowano) JOptionPane.showMessageDialog(null,"nie udało sie zalogować");
+        String login = loginField.getText();
+        String passwd = passwdField.getText();
+        //tutaj spradź login i hasło
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
