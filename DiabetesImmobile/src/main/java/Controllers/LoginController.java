@@ -3,16 +3,23 @@ package Controllers; /**
  */
 
 
-
+import Connectivity.Connectivity;
+import Model.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class LoginController {
+
+    Connectivity conn = new Connectivity("http://dialisys.azurewebsites.net");
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -38,10 +45,14 @@ public class LoginController {
     }
 
     @FXML
-    void logIn(ActionEvent event) {
+    void logIn(ActionEvent event) throws IOException {
         String login = loginField.getText();
         String passwd = passwdField.getText();
-        //tutaj spradź login i hasło
+        Login log = conn.checkLogin(login,passwd);
+        if(log==null) JOptionPane.showMessageDialog(null,"Zjebałeś");
+        else JOptionPane.showMessageDialog(null,"Zalogowano jako: "+log.getId());
+        //TODO wywołanie pacjenta lub piguły
+        //TODO wyciągnij imie i nazwisko
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
