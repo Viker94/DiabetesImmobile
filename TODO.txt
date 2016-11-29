@@ -1,0 +1,4 @@
+1) Przypisywanie userów do pielêgniarek (plan mam ju¿ u³o¿ony, interfejs przygotowany)
+2) Oprogramowanie interfejsu dla pielêgniarki (interfejs gotowy)
+3) Oprogramowanie przegl¹dania z poziomu pielêgniarki danych przypisanych jej pacjentów (interfejs z progress barami i wykresami gotowy, tylko oprogramowaæ)
+4) Poprawki i zabezpieczenia (wywalanie aplikacji przy edycji konta jak sie poda w nazwie polski znak albo spacje itd)
