@@ -51,7 +51,7 @@ public class LoginController {
         Login log = conn.checkLogin(login,passwd);
         if(log==null) JOptionPane.showMessageDialog(null,"Zjebałeś");
         else JOptionPane.showMessageDialog(null,"Zalogowano jako: "+log.getId());
-        //TODO wywołanie pacjenta lub piguły
+        //TODO wywołanie admina lub piguły
         //TODO wyciągnij imie i nazwisko
     }
 

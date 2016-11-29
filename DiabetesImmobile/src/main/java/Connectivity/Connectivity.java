@@ -1,6 +1,7 @@
 package Connectivity;
 
 import Model.Login;
+import Model.Product;
 import Model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
@@ -19,17 +20,35 @@ import java.util.List;
 public class Connectivity {
     private HttpClient client;
     private String address;
+    private ObjectMapper mapper;
 
     public Connectivity(String address){
         this.client = HttpClientBuilder.create().build();
         this.address = address;
+        this.mapper = new ObjectMapper();
 
 
     }
+    public List<Product> getProducts() throws IOException {
+        List<Product> products = null;
+        Product tmp = null;
+        HttpGet getRequest = new HttpGet(
+                this.address+"/products");
+        getRequest.addHeader("accept", "application/json");
+        HttpResponse response = client.execute(getRequest);
+        String json = null;
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader((response.getEntity().getContent())));
+        while((json = br.readLine())!=null){
+            tmp = mapper.readValue(json,Product.class);
+        }
+
+        return products;
+    }
     public List<User> getPatients() throws IOException { //zwraca użytkowników ze statusem pacjenta,
         List<User> patients = null;                     //żeby wypełnic liste wyboru do podglądu dla piguły
-        HttpGet getRequest = new HttpGet(
-                this.address+"/login/");
+        HttpGet getRequest = new HttpGet(               //lub liste do przypisania dla admina
+                this.address+"/login");
         getRequest.addHeader("accept", "application/json");
         HttpResponse response = client.execute(getRequest);
 
@@ -46,7 +65,6 @@ public class Connectivity {
         BufferedReader br2;
         Login tmpLogin = null;
         User tmpUser = null;
-        ObjectMapper mapper = new ObjectMapper();
         while((json = br.readLine()) != null){
             tmpLogin = mapper.readValue(json,Login.class);
             if(tmpLogin.getType()==1){
@@ -63,6 +81,7 @@ public class Connectivity {
         }
         return patients;
     }
+    //TODO Przerób to na piguły
     public Login checkLogin(String login, String passwd) throws IOException { //sprawdza istnienie konta
         HttpGet getRequest = new HttpGet(                                       //zwraca obiekt Login lub null
                 this.address+"/login/"+login+"/"+passwd);
@@ -79,7 +98,6 @@ public class Connectivity {
         json = br.readLine();
 
         Login wynik = null;
-        ObjectMapper mapper = new ObjectMapper();
         if(json!=null){
             wynik = mapper.readValue(json,Login.class);
         }
