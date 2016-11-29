@@ -6,11 +6,17 @@ package Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainScreenPatientController {
 
@@ -62,8 +68,8 @@ public class MainScreenPatientController {
     @FXML // fx:id="imieNazwisko"
     private Label imieNazwisko; // Value injected by FXMLLoader
 
-    @FXML // fx:id="wyloguj"
-    private Button wyloguj; // Value injected by FXMLLoader
+    @FXML // fx:id="wylogujButton"
+    private Button wylogujButton; // Value injected by FXMLLoader
 
     @FXML // fx:id="imieNazwiskoPacjenta"
     private Label imieNazwiskoPacjenta; // Value injected by FXMLLoader
@@ -72,13 +78,51 @@ public class MainScreenPatientController {
     private Button wrocDoListy; // Value injected by FXMLLoader
 
     @FXML
+    private Button refreshWodaButton;
+
+    @FXML
+    private Button refreshSodButton;
+
+    @FXML
+    private Button refreshPotasButton;
+
+    @FXML
+    private Button refreshLimityButton;
+
+    @FXML
     void wrocDoListy(ActionEvent event) {
 
     }
 
     @FXML
-    void wyloguj(ActionEvent event) {
+    void wyloguj(ActionEvent event) throws IOException {
+        Stage stage = (Stage) wylogujButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+        stage.close();
+        Stage stageNew = new Stage();
+        stageNew.setTitle("Logowanie");
+        stageNew.setScene(new Scene(root));
+        stageNew.show();
+        stage.getScene().getWindow().hide();
+    }
+
+    @FXML
+    void refreshLimity(ActionEvent event) {
 
     }
 
+    @FXML
+    void refreshPotas(ActionEvent event) {
+
+    }
+
+    @FXML
+    void refreshSod(ActionEvent event) {
+
+    }
+
+    @FXML
+    void refreshWoda(ActionEvent event) {
+
+    }
 }

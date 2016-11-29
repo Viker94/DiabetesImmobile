@@ -19,6 +19,9 @@ public class User {
     private double potassium;
     private double water;
     private double sodium;
+    private double limitPotassium;
+    private double limitWater;
+    private double limitSodium;
     private Login login;
     private List<Consumption> consumed;
 }

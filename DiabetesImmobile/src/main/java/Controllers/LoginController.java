@@ -4,12 +4,18 @@ package Controllers; /**
 
 
 import Connectivity.Connectivity;
+import Globality.LoginData;
 import Model.Login;
+import Model.Nurse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -19,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class LoginController {
 
-    Connectivity conn = new Connectivity("http://dialisys.azurewebsites.net");
+    //public static Connectivity conn = new Connectivity();
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -48,11 +54,32 @@ public class LoginController {
     void logIn(ActionEvent event) throws IOException {
         String login = loginField.getText();
         String passwd = passwdField.getText();
-        Login log = conn.checkLogin(login,passwd);
-        if(log==null) JOptionPane.showMessageDialog(null,"Zjebałeś");
-        else JOptionPane.showMessageDialog(null,"Zalogowano jako: "+log.getId());
-        //TODO wywołanie admina lub piguły
-        //TODO wyciągnij imie i nazwisko
+        Nurse log = LoginData.conn.checkLogin(login,passwd);
+        if(log==null) JOptionPane.showMessageDialog(null,"Podano błędny login i/lub hasło");
+        else {
+            LoginData.imie = log.getFirstName();
+            LoginData.nazwisko = log.getLastName();
+            LoginData.login = log.getLogin();
+
+            Stage stage = (Stage) logInButton.getScene().getWindow();
+            Parent root;
+            Stage stageNew = new Stage();
+            if(log.getAdmin()) {
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("AdminPanel.fxml"));
+                stageNew.setTitle("Panel administracyjny");
+            }
+            else{
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("MainScreenPigula.fxml"));
+                stageNew.setTitle("Panel pielęgniarki");
+            }
+            stage.close();
+            stageNew.setScene(new Scene(root));
+            stageNew.show();
+            stage.getScene().getWindow().hide();
+        }
+
+
+
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

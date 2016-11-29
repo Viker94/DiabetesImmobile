@@ -6,10 +6,16 @@ package Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainScreenPigulaController {
 
@@ -40,8 +46,15 @@ public class MainScreenPigulaController {
     }
 
     @FXML
-    void wyloguj(ActionEvent event) {
-
+    void wyloguj(ActionEvent event) throws IOException {
+        Stage stage = (Stage) wylogujButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+        stage.close();
+        Stage stageNew = new Stage();
+        stageNew.setTitle("Logowanie");
+        stageNew.setScene(new Scene(root));
+        stageNew.show();
+        stage.getScene().getWindow().hide();
     }
 
 }

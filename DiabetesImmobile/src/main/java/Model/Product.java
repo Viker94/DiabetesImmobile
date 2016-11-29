@@ -14,6 +14,8 @@ public class Product {
 
     private Long id;
     private String name;
-    private Double potassiumGrowth;
-    private Double waterGrowth;
+    private Double potassium;
+    private Double water;
+    private Double sodium;
+    private int category;
 }

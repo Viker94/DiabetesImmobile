@@ -4,15 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
- * Created by Marcin on 25.11.2016.
+ * Created by fishe on 29.11.2016.
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Login {
-
+public class UsersForTable {
     private Long id;
+    private String firstName;
+    private String lastName;
     private String login;
-    private String passwd;
+    private String haslo;
 }

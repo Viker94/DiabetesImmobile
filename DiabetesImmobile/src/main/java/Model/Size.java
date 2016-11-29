@@ -5,14 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Created by Marcin on 25.11.2016.
+ * Created by fishe on 29.11.2016.
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Login {
-
-    private Long id;
-    private String login;
-    private String passwd;
+public class Size {
+    private int size;
 }

@@ -4,36 +4,49 @@
 
 package Controllers;
 
+import Globality.LoginData;
+import Model.NursesForTable;
+import Model.UsersForTable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
 
 public class AdminPanelController {
 
     @FXML // fx:id="imieNazwisko"
     private Label imieNazwisko; // Value injected by FXMLLoader
 
-    @FXML // fx:id="wyloguj"
-    private Button wyloguj; // Value injected by FXMLLoader
+    @FXML // fx:id="wylogujButton"
+    private Button wylogujButton; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPacjenci"
-    private TableView<?> tabPacjenci; // Value injected by FXMLLoader
+    private TableView<UsersForTable> tabPacjenci; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPacjenciID"
-    private TableColumn<?, ?> tabPacjenciID; // Value injected by FXMLLoader
+    private TableColumn<UsersForTable, Long> tabPacjenciID; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPacjenciImie"
-    private TableColumn<?, ?> tabPacjenciImie; // Value injected by FXMLLoader
+    private TableColumn<UsersForTable, String> tabPacjenciImie; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPacjenciNazwisko"
-    private TableColumn<?, ?> tabPacjenciNazwisko; // Value injected by FXMLLoader
+    private TableColumn<UsersForTable, String> tabPacjenciNazwisko; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPacjenciLogin"
-    private TableColumn<?, ?> tabPacjenciLogin; // Value injected by FXMLLoader
+    private TableColumn<UsersForTable, String> tabPacjenciLogin; // Value injected by FXMLLoader
 
     @FXML // fx:id="usunPacjentaButton"
     private Button usunPacjentaButton; // Value injected by FXMLLoader
@@ -57,22 +70,22 @@ public class AdminPanelController {
     private Button dodajPacjentaButton; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPiguly"
-    private TableView<?> tabPiguly; // Value injected by FXMLLoader
+    private TableView<NursesForTable> tabPiguly; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPigulyID"
-    private TableColumn<?, ?> tabPigulyID; // Value injected by FXMLLoader
+    private TableColumn<NursesForTable, Long> tabPigulyID; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPigulyImie"
-    private TableColumn<?, ?> tabPigulyImie; // Value injected by FXMLLoader
+    private TableColumn<NursesForTable, String> tabPigulyImie; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPigulyNazwisko"
-    private TableColumn<?, ?> tabPigulyNazwisko; // Value injected by FXMLLoader
+    private TableColumn<NursesForTable, String> tabPigulyNazwisko; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPigulyLogin"
-    private TableColumn<?, ?> tabPigulyLogin; // Value injected by FXMLLoader
+    private TableColumn<NursesForTable, String> tabPigulyLogin; // Value injected by FXMLLoader
 
     @FXML // fx:id="tabPigulyLiczbaPacjentow"
-    private TableColumn<?, ?> tabPigulyLiczbaPacjentow; // Value injected by FXMLLoader
+    private TableColumn<NursesForTable, Integer> tabPigulyLiczbaPacjentow; // Value injected by FXMLLoader
 
     @FXML // fx:id="usunPiguleButton"
     private Button usunPiguleButton; // Value injected by FXMLLoader
@@ -99,23 +112,91 @@ public class AdminPanelController {
     private Button dodajPiguleButton; // Value injected by FXMLLoader
 
     @FXML
-    void dodajPacjenta(ActionEvent event) {
+    private Button refreshPacjenciButton;
 
+    @FXML
+    private Button refreshPigulyButton;
+
+    @FXML
+    private Button usunPacjOdPigulyButton;
+
+    @FXML
+    public void initialize() {
+        imieNazwisko.setText(LoginData.imie+" "+LoginData.nazwisko);
     }
 
     @FXML
-    void dodajPigule(ActionEvent event) {
-
+    void wyloguj(ActionEvent event) throws IOException {
+        Stage stage = (Stage) imieNazwisko.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+        stage.close();
+        Stage stageNew = new Stage();
+        stageNew.setTitle("Logowanie");
+        stageNew.setScene(new Scene(root));
+        stageNew.show();
+        stage.getScene().getWindow().hide();
     }
 
     @FXML
-    void edytujPacjenta(ActionEvent event) {
+    void dodajPacjenta(ActionEvent event) throws IOException {
+        String imie = pacjentImieTF.getText();
+        String nazwisko = pacjentNazwiskoTF.getText();
+        String login = pacjentLoginTF.getText();
+        String password = pacjentHasloTF.getText();
 
+        LoginData.conn.addUser(imie,nazwisko,login,password);
+        pacjentImieTF.setText("");
+        pacjentNazwiskoTF.setText("");
+        pacjentHasloTF.setText("");
+        pacjentLoginTF.setText("");
     }
 
     @FXML
-    void edytujPigule(ActionEvent event) {
+    void dodajPigule(ActionEvent event) throws IOException {
+        String imie = pigulaImieTF.getText();
+        String nazwisko = pigulaNazwiskoTF.getText();
+        String login = pigulaLoginTF.getText();
+        String password = pigulaHasloTF.getText();
 
+        LoginData.conn.addNurse(imie,nazwisko,login,password);
+
+        pigulaImieTF.setText("");
+        pigulaNazwiskoTF.setText("");
+        pigulaLoginTF.setText("");
+        pigulaHasloTF.setText("");
+    }
+
+    @FXML
+    void edytujPacjenta(ActionEvent event) throws IOException {
+        //Stage stage = (Stage) imieNazwisko.getScene().getWindow();
+        if(tabPacjenci.getSelectionModel().getSelectedItem()!=null) {
+            LoginData.coDoEdycji = 1;
+            LoginData.selectedUser = tabPacjenci.getSelectionModel().getSelectedItem();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("UserEdit.fxml"));
+            //stage.close();
+            Stage stageNew = new Stage();
+            stageNew.setTitle("Edycja pacjenta");
+            stageNew.setScene(new Scene(root));
+            stageNew.show();
+            // stage.getScene().getWindow().hide();
+        }
+    }
+
+    @FXML
+    void edytujPigule(ActionEvent event) throws IOException {
+        if(tabPiguly.getSelectionModel().getSelectedItem()!=null) {
+            //Stage stage = (Stage) imieNazwisko.getScene().getWindow();
+            LoginData.coDoEdycji = 2;
+            LoginData.selectedNurse = tabPiguly.getSelectionModel().getSelectedItem();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("UserEdit.fxml"));
+            //stage.close();
+
+            Stage stageNew = new Stage();
+            stageNew.setTitle("Edycja pielegniarki");
+            stageNew.setScene(new Scene(root));
+            stageNew.show();
+            // stage.getScene().getWindow().hide();
+        }
     }
 
     @FXML
@@ -124,13 +205,50 @@ public class AdminPanelController {
     }
 
     @FXML
-    void usunPacjenta(ActionEvent event) {
-
+    void usunPacjenta(ActionEvent event) throws IOException {
+        if(tabPacjenci.getSelectionModel().getSelectedItem()!=null) {
+            long id = tabPacjenci.getSelectionModel().getSelectedItem().getId();
+            LoginData.conn.deleteUser(id);
+        }
     }
 
     @FXML
-    void usunPigule(ActionEvent event) {
-
+    void usunPigule(ActionEvent event) throws IOException {
+        if(tabPiguly.getSelectionModel().getSelectedItem()!=null) {
+            long id = tabPiguly.getSelectionModel().getSelectedItem().getId();
+            LoginData.conn.nurseDel(id);
+        }
     }
 
+    @FXML
+    void refreshPacjenci(ActionEvent event) throws IOException {
+        List<UsersForTable> users = LoginData.conn.getPatients();
+        ObservableList<UsersForTable> ousers = FXCollections.observableArrayList(users);
+        tabPacjenciID.setCellValueFactory(new PropertyValueFactory<UsersForTable, Long>("id"));
+        tabPacjenciImie.setCellValueFactory(new PropertyValueFactory<UsersForTable, String>("firstName"));
+        tabPacjenciNazwisko.setCellValueFactory(new PropertyValueFactory<UsersForTable, String>("lastName"));
+        tabPacjenciLogin.setCellValueFactory(new PropertyValueFactory<UsersForTable, String>("login"));
+        tabPacjenci.setItems(ousers);
+    }
+
+    @FXML
+    void refreshPiguly(ActionEvent event) throws IOException {
+        List<NursesForTable> piguly = LoginData.conn.getNurses();
+
+        ObservableList<NursesForTable> opiele = FXCollections.observableArrayList(piguly);
+        tabPigulyID.setCellValueFactory(new PropertyValueFactory<NursesForTable, Long>("id"));
+        tabPigulyImie.setCellValueFactory(new PropertyValueFactory<NursesForTable, String>("firstName"));
+        tabPigulyNazwisko.setCellValueFactory(new PropertyValueFactory<NursesForTable, String>("lastName"));
+        tabPigulyLogin.setCellValueFactory(new PropertyValueFactory<NursesForTable, String>("login"));
+        tabPigulyLiczbaPacjentow.setCellValueFactory(new PropertyValueFactory<NursesForTable, Integer>("liczbaPacjentow"));
+        tabPiguly.setItems(opiele);
+    }
+
+    @FXML
+    void zresetujPolaczeniaPiguly(ActionEvent event) throws IOException {
+        if(tabPiguly.getSelectionModel().getSelectedItem()!=null) {
+            long id = tabPiguly.getSelectionModel().getSelectedItem().getId();
+            LoginData.conn.resetPolaczenPiguly(id);
+        }
+    }
 }

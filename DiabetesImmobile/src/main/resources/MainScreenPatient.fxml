@@ -40,6 +40,7 @@
                         <Label fx:id="potasLimit" layoutX="496.0" layoutY="34.0" text="Label" />
                         <Label fx:id="sodLimit" layoutX="496.0" layoutY="69.0" text="Label" />
                         <Label fx:id="wodaLimit" layoutX="496.0" layoutY="107.0" text="Label" />
+                        <Button fx:id="refreshLimityButton" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#refreshLimity" text="Odśwież" />
                      </children>
                   </Pane>
                </content>
@@ -56,6 +57,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
+                        <Button fx:id="refreshPotasButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshPotas" text="Odśwież" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -71,6 +73,7 @@
                               <NumberAxis side="LEFT" />
                            </yAxis>
                         </LineChart>
+                        <Button fx:id="refreshWodaButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshWoda" text="Odśwież" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -86,6 +89,7 @@
                               <NumberAxis side="LEFT" />
                            </yAxis>
                         </LineChart>
+                        <Button fx:id="refreshSodButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshSod" text="Odśwież" />
                      </children>
                   </AnchorPane>
               </content>
@@ -94,7 +98,7 @@
       </TabPane>
       <Label layoutX="14.0" layoutY="14.0" text="Witaj:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <Label fx:id="imieNazwisko" layoutX="54.0" layoutY="14.0" prefHeight="17.0" prefWidth="72.0" text="Kappa Kappa" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="14.0" />
-      <Button fx:id="wyloguj" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" onAction="#wyloguj" prefHeight="25.0" prefWidth="86.0" text="Wyloguj" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="wylogujButton" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" onAction="#wyloguj" prefHeight="25.0" prefWidth="86.0" text="Wyloguj" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
       <Label layoutX="14.0" layoutY="35.0" text="Aktualnie przeglądasz dane użytkownika:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="35.0" />
       <Label fx:id="imieNazwiskoPacjenta" layoutX="242.0" layoutY="35.0" text="Kappa Kappa" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="35.0" />
       <Button fx:id="wrocDoListy" layoutX="500.0" layoutY="40.0" mnemonicParsing="false" onAction="#wrocDoListy" text="Wróć do listy" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="40.0" />

@@ -16,4 +16,5 @@ public class Consumption {
     private Long id;
     private Product product;
     private Date date;
+    private Integer amount;
 }
