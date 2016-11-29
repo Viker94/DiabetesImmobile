@@ -34,7 +34,7 @@ public class Connectivity {
 
 
     public List<Product> getProducts() throws IOException {
-        //TO NIE ZADZIAłA
+        //TO NIE ZADZIAłA, SPRAWDŹ JAK DEKODOWANE JEST getNurses(), tak działa
         List<Product> products = null;
         Product tmp = null;
         HttpGet getRequest = new HttpGet(
