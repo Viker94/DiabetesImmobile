@@ -4,7 +4,7 @@
 
 package Controllers;
 
-import Globality.LoginData;
+import Global.Commons;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,18 +37,18 @@ public class UserEditController {
 
     @FXML
     public void initialize() {
-        if(LoginData.coDoEdycji==1) {
-            userImie.setText(LoginData.selectedUser.getFirstName());
-            userNazwisko.setText(LoginData.selectedUser.getLastName());
-            userLogin.setText(LoginData.selectedUser.getLogin());
-            userHaslo.setText(LoginData.selectedUser.getHaslo());
-            id = LoginData.selectedUser.getId();
-        }else if(LoginData.coDoEdycji==2){
-            userImie.setText(LoginData.selectedNurse.getFirstName());
-            userNazwisko.setText(LoginData.selectedNurse.getLastName());
-            userLogin.setText(LoginData.selectedNurse.getLogin());
-            userHaslo.setText(LoginData.selectedNurse.getPassword());
-            id = LoginData.selectedNurse.getId();
+        if(Commons.getUserOrNurse()==1) {
+            userImie.setText(Commons.getSelectedUser().getFirstName());
+            userNazwisko.setText(Commons.getSelectedUser().getLastName());
+            userLogin.setText(Commons.getSelectedUser().getLogin());
+            userHaslo.setText(Commons.getSelectedUser().getHaslo());
+            id = Commons.getSelectedUser().getId();
+        }else if(Commons.getUserOrNurse()==2){
+            userImie.setText(Commons.getSelectedNurse().getFirstName());
+            userNazwisko.setText(Commons.getSelectedNurse().getLastName());
+            userLogin.setText(Commons.getSelectedNurse().getLogin());
+            userHaslo.setText(Commons.getSelectedNurse().getPassword());
+            id = Commons.getSelectedNurse().getId();
         }
     }
 
@@ -58,10 +58,10 @@ public class UserEditController {
         String nazwisko = userNazwisko.getText();
         String login = userLogin.getText();
         String haslo = userHaslo.getText();
-        if(LoginData.coDoEdycji==1) {
-            LoginData.conn.editUser(id, imie, nazwisko, login, haslo);
-        }else if(LoginData.coDoEdycji==2){
-            LoginData.conn.editNurse(id,imie,nazwisko,login,haslo);
+        if(Commons.getUserOrNurse()==1) {
+            Commons.conn.editUser(id, imie, nazwisko, login, haslo);
+        }else if(Commons.getUserOrNurse()==2){
+            Commons.conn.editNurse(id,imie,nazwisko,login,haslo);
         }
         goBack(event);
     }

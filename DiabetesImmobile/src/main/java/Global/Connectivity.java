@@ -1,4 +1,4 @@
-package Connectivity;
+package Global;
 
 import Model.*;
 import com.fasterxml.jackson.core.type.TypeReference;

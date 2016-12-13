@@ -3,9 +3,7 @@ package Controllers; /**
  */
 
 
-import Connectivity.Connectivity;
-import Globality.LoginData;
-import Model.Login;
+import Global.Commons;
 import Model.Nurse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,12 +52,12 @@ public class LoginController {
     void logIn(ActionEvent event) throws IOException {
         String login = loginField.getText();
         String passwd = passwdField.getText();
-        Nurse log = LoginData.conn.checkLogin(login,passwd);
+        Nurse log = Commons.conn.checkLogin(login,passwd);
         if(log==null) JOptionPane.showMessageDialog(null,"Podano błędny login i/lub hasło");
         else {
-            LoginData.imie = log.getFirstName();
-            LoginData.nazwisko = log.getLastName();
-            LoginData.login = log.getLogin();
+            Commons.setImie(log.getFirstName());
+            Commons.setNazwisko(log.getLastName());
+            Commons.setLogin(log.getLogin());
 
             Stage stage = (Stage) logInButton.getScene().getWindow();
             Parent root;

@@ -4,7 +4,7 @@
 
 package Controllers;
 
-import Globality.LoginData;
+import Global.Commons;
 import Model.NursesForTable;
 import Model.UsersForTable;
 import javafx.collections.FXCollections;
@@ -122,11 +122,11 @@ public class AdminPanelController {
 
     @FXML
     public void initialize() {
-        imieNazwisko.setText(LoginData.imie+" "+LoginData.nazwisko);
+        imieNazwisko.setText(Commons.getImie()+" "+ Commons.getNazwisko());
     }
 
     @FXML
-    void wyloguj(ActionEvent event) throws IOException {
+    void logout(ActionEvent event) throws IOException {
         Stage stage = (Stage) imieNazwisko.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
         stage.close();
@@ -138,13 +138,13 @@ public class AdminPanelController {
     }
 
     @FXML
-    void dodajPacjenta(ActionEvent event) throws IOException {
+    void addPatient(ActionEvent event) throws IOException {
         String imie = pacjentImieTF.getText();
         String nazwisko = pacjentNazwiskoTF.getText();
         String login = pacjentLoginTF.getText();
         String password = pacjentHasloTF.getText();
 
-        LoginData.conn.addUser(imie,nazwisko,login,password);
+        Commons.conn.addUser(imie,nazwisko,login,password);
         pacjentImieTF.setText("");
         pacjentNazwiskoTF.setText("");
         pacjentHasloTF.setText("");
@@ -152,13 +152,13 @@ public class AdminPanelController {
     }
 
     @FXML
-    void dodajPigule(ActionEvent event) throws IOException {
+    void addNurse(ActionEvent event) throws IOException {
         String imie = pigulaImieTF.getText();
         String nazwisko = pigulaNazwiskoTF.getText();
         String login = pigulaLoginTF.getText();
         String password = pigulaHasloTF.getText();
 
-        LoginData.conn.addNurse(imie,nazwisko,login,password);
+        Commons.conn.addNurse(imie,nazwisko,login,password);
 
         pigulaImieTF.setText("");
         pigulaNazwiskoTF.setText("");
@@ -167,11 +167,11 @@ public class AdminPanelController {
     }
 
     @FXML
-    void edytujPacjenta(ActionEvent event) throws IOException {
+    void editPatient(ActionEvent event) throws IOException {
         //Stage stage = (Stage) imieNazwisko.getScene().getWindow();
         if(tabPacjenci.getSelectionModel().getSelectedItem()!=null) {
-            LoginData.coDoEdycji = 1;
-            LoginData.selectedUser = tabPacjenci.getSelectionModel().getSelectedItem();
+            Commons.setUserOrNurse(1);
+            Commons.setSelectedUser(tabPacjenci.getSelectionModel().getSelectedItem());
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("UserEdit.fxml"));
             //stage.close();
             Stage stageNew = new Stage();
@@ -183,11 +183,11 @@ public class AdminPanelController {
     }
 
     @FXML
-    void edytujPigule(ActionEvent event) throws IOException {
+    void editNurse(ActionEvent event) throws IOException {
         if(tabPiguly.getSelectionModel().getSelectedItem()!=null) {
             //Stage stage = (Stage) imieNazwisko.getScene().getWindow();
-            LoginData.coDoEdycji = 2;
-            LoginData.selectedNurse = tabPiguly.getSelectionModel().getSelectedItem();
+            Commons.setUserOrNurse(2);
+            Commons.setSelectedNurse(tabPiguly.getSelectionModel().getSelectedItem());
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("UserEdit.fxml"));
             //stage.close();
 
@@ -200,29 +200,29 @@ public class AdminPanelController {
     }
 
     @FXML
-    void przypiszPacjenta(ActionEvent event) {
+    void assignPatient(ActionEvent event) {
 
     }
 
     @FXML
-    void usunPacjenta(ActionEvent event) throws IOException {
+    void deletePatient(ActionEvent event) throws IOException {
         if(tabPacjenci.getSelectionModel().getSelectedItem()!=null) {
             long id = tabPacjenci.getSelectionModel().getSelectedItem().getId();
-            LoginData.conn.deleteUser(id);
+            Commons.conn.deleteUser(id);
         }
     }
 
     @FXML
-    void usunPigule(ActionEvent event) throws IOException {
+    void deleteNurse(ActionEvent event) throws IOException {
         if(tabPiguly.getSelectionModel().getSelectedItem()!=null) {
             long id = tabPiguly.getSelectionModel().getSelectedItem().getId();
-            LoginData.conn.nurseDel(id);
+            Commons.conn.nurseDel(id);
         }
     }
 
     @FXML
-    void refreshPacjenci(ActionEvent event) throws IOException {
-        List<UsersForTable> users = LoginData.conn.getPatients();
+    void refreshPatientsTable(ActionEvent event) throws IOException {
+        List<UsersForTable> users = Commons.conn.getPatients();
         ObservableList<UsersForTable> ousers = FXCollections.observableArrayList(users);
         tabPacjenciID.setCellValueFactory(new PropertyValueFactory<UsersForTable, Long>("id"));
         tabPacjenciImie.setCellValueFactory(new PropertyValueFactory<UsersForTable, String>("firstName"));
@@ -232,8 +232,8 @@ public class AdminPanelController {
     }
 
     @FXML
-    void refreshPiguly(ActionEvent event) throws IOException {
-        List<NursesForTable> piguly = LoginData.conn.getNurses();
+    void refreshNursesTable(ActionEvent event) throws IOException {
+        List<NursesForTable> piguly = Commons.conn.getNurses();
 
         ObservableList<NursesForTable> opiele = FXCollections.observableArrayList(piguly);
         tabPigulyID.setCellValueFactory(new PropertyValueFactory<NursesForTable, Long>("id"));
@@ -245,10 +245,10 @@ public class AdminPanelController {
     }
 
     @FXML
-    void zresetujPolaczeniaPiguly(ActionEvent event) throws IOException {
+    void resetNurseConnections(ActionEvent event) throws IOException {
         if(tabPiguly.getSelectionModel().getSelectedItem()!=null) {
             long id = tabPiguly.getSelectionModel().getSelectedItem().getId();
-            LoginData.conn.resetPolaczenPiguly(id);
+            Commons.conn.resetPolaczenPiguly(id);
         }
     }
 }
