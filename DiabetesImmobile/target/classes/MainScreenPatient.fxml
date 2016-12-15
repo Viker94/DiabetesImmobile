@@ -19,28 +19,28 @@
                <content>
                   <Pane>
                      <children>
-                        <ProgressBar fx:id="potasBar" layoutX="62.0" layoutY="34.0" prefWidth="200.0" progress="0.0" />
-                        <ProgressBar fx:id="SodBar" layoutX="62.0" layoutY="68.0" prefWidth="200.0" progress="0.0" />
-                        <ProgressBar fx:id="WodaBar" layoutX="62.0" layoutY="107.0" prefWidth="200.0" progress="0.0" />
+                        <ProgressBar fx:id="potassiumBar" layoutX="62.0" layoutY="34.0" prefWidth="200.0" progress="0.0" />
+                        <ProgressBar fx:id="sodiumBar" layoutX="62.0" layoutY="68.0" prefWidth="200.0" progress="0.0" />
+                        <ProgressBar fx:id="waterBar" layoutX="62.0" layoutY="107.0" prefWidth="200.0" progress="0.0" />
                         <Label layoutX="14.0" layoutY="34.0" text="Potas:" />
                         <Label layoutX="14.0" layoutY="68.0" text="Sód:" />
                         <Label layoutX="14.0" layoutY="107.0" text="Woda:" />
-                        <Label fx:id="potasProcent" layoutX="272.0" layoutY="34.0" text="\%" />
-                        <Label fx:id="sodProcent" layoutX="272.0" layoutY="69.0" text="\%" />
-                        <Label fx:id="wodaProcent" layoutX="272.0" layoutY="107.0" text="\%" />
+                        <Label fx:id="potassiumPercent" layoutX="272.0" layoutY="34.0" text="\%" />
+                        <Label fx:id="sodiumPercent" layoutX="272.0" layoutY="69.0" text="\%" />
+                        <Label fx:id="waterPercent" layoutX="272.0" layoutY="107.0" text="\%" />
                         <Label layoutX="322.0" layoutY="34.0" text="Aktualnie:" />
                         <Label layoutX="322.0" layoutY="69.0" text="Aktualnie:" />
                         <Label layoutX="322.0" layoutY="107.0" text="Aktualnie:" />
                         <Label layoutX="456.0" layoutY="34.0" text="Limit:" />
                         <Label layoutX="456.0" layoutY="69.0" text="Limit:" />
                         <Label layoutX="456.0" layoutY="107.0" text="Limit:" />
-                        <Label fx:id="potasAktualny" layoutX="383.0" layoutY="34.0" text="Label" />
-                        <Label fx:id="sodAktualny" layoutX="383.0" layoutY="69.0" text="Label" />
-                        <Label fx:id="wodaAktualna" layoutX="383.0" layoutY="108.0" text="Label" />
-                        <Label fx:id="potasLimit" layoutX="496.0" layoutY="34.0" text="Label" />
-                        <Label fx:id="sodLimit" layoutX="496.0" layoutY="69.0" text="Label" />
-                        <Label fx:id="wodaLimit" layoutX="496.0" layoutY="107.0" text="Label" />
-                        <Button fx:id="refreshLimityButton" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#refreshLimity" text="Odśwież" />
+                        <Label fx:id="potassiumCurrent" layoutX="383.0" layoutY="34.0" text="Label" />
+                        <Label fx:id="sodiumCurrent" layoutX="383.0" layoutY="69.0" text="Label" />
+                        <Label fx:id="waterCurrent" layoutX="383.0" layoutY="108.0" text="Label" />
+                        <Label fx:id="potassiumLimit" layoutX="496.0" layoutY="34.0" text="Label" />
+                        <Label fx:id="sodiumLimit" layoutX="496.0" layoutY="69.0" text="Label" />
+                        <Label fx:id="waterLimit" layoutX="496.0" layoutY="107.0" text="Label" />
+                        <Button fx:id="refreshLimitsButton" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#refreshLimits" text="Odśwież" />
                      </children>
                   </Pane>
                </content>
@@ -49,7 +49,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <LineChart fx:id="potasChart" layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                        <LineChart fx:id="potassiumChart" layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -57,11 +57,11 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
-                        <Button fx:id="refreshPotasButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshPotas" text="Odśwież" />
+                        <Button fx:id="refreshPotassiumButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshPotassium" text="Odśwież" />
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="wodaChart" text="Woda">
+            <Tab fx:id="waterChart" text="Woda">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -73,11 +73,11 @@
                               <NumberAxis side="LEFT" />
                            </yAxis>
                         </LineChart>
-                        <Button fx:id="refreshWodaButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshWoda" text="Odśwież" />
+                        <Button fx:id="refreshWaterButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshWater" text="Odśwież" />
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="sodChart" text="Sód">
+            <Tab fx:id="sodiumChart" text="Sód">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -89,7 +89,7 @@
                               <NumberAxis side="LEFT" />
                            </yAxis>
                         </LineChart>
-                        <Button fx:id="refreshSodButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshSod" text="Odśwież" />
+                        <Button fx:id="refreshSodiumButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshSodium" text="Odśwież" />
                      </children>
                   </AnchorPane>
               </content>
@@ -97,10 +97,10 @@
         </tabs>
       </TabPane>
       <Label layoutX="14.0" layoutY="14.0" text="Witaj:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-      <Label fx:id="imieNazwisko" layoutX="54.0" layoutY="14.0" prefHeight="17.0" prefWidth="72.0" text="Kappa Kappa" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="14.0" />
-      <Button fx:id="wylogujButton" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" onAction="#wyloguj" prefHeight="25.0" prefWidth="86.0" text="Wyloguj" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
+      <Label fx:id="firstAndLastName" layoutX="54.0" layoutY="14.0" prefHeight="17.0" prefWidth="72.0" text="Kappa Kappa" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="14.0" />
+      <Button fx:id="logoutButton" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="86.0" text="Wyloguj" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
       <Label layoutX="14.0" layoutY="35.0" text="Aktualnie przeglądasz dane użytkownika:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="35.0" />
-      <Label fx:id="imieNazwiskoPacjenta" layoutX="242.0" layoutY="35.0" text="Kappa Kappa" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="35.0" />
-      <Button fx:id="wrocDoListy" layoutX="500.0" layoutY="40.0" mnemonicParsing="false" onAction="#wrocDoListy" text="Wróć do listy" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="40.0" />
+      <Label fx:id="patientFirstAndLastName" layoutX="242.0" layoutY="35.0" text="Kappa Kappa" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="35.0" />
+      <Button fx:id="backToList" layoutX="500.0" layoutY="40.0" mnemonicParsing="false" onAction="#backToList" text="Wróć do listy" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="40.0" />
    </children>
 </AnchorPane>

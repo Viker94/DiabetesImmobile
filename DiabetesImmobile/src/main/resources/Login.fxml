@@ -9,7 +9,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
    <children>
       <TextField fx:id="loginField" layoutX="100.0" layoutY="22.0" />
-      <PasswordField fx:id="passwdField" layoutX="100.0" layoutY="59.0" />
+      <PasswordField fx:id="passwordField" layoutX="100.0" layoutY="59.0" />
       <Button fx:id="logInButton" layoutX="60.0" layoutY="106.0" mnemonicParsing="false" onAction="#logIn" text="Zaloguj" />
       <Button fx:id="cancelButton" layoutX="175.0" layoutY="106.0" mnemonicParsing="false" onAction="#cancel" text="Zamknij" />
       <Label layoutX="43.0" layoutY="26.0" text="Login:" />

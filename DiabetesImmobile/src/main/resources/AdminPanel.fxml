@@ -12,25 +12,25 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminPanelController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Witaj:" />
-      <Label fx:id="imieNazwisko" layoutX="58.0" layoutY="14.0" text="Kappa Kappa" />
-      <Button fx:id="wyloguj" layoutX="526.0" layoutY="10.0" mnemonicParsing="false" onAction="#logout" text="Wyloguj" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
+      <Label fx:id="firstAndLastName" layoutX="58.0" layoutY="14.0" text="Kappa Kappa" />
+      <Button fx:id="logoutButton" layoutX="526.0" layoutY="10.0" mnemonicParsing="false" onAction="#logout" text="Wyloguj" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
       <TabPane layoutY="48.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
         <tabs>
           <Tab text="Pacjenci">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tabPacjenci" layoutX="100.0" layoutY="14.0" prefHeight="301.0" prefWidth="490.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <TableView fx:id="tabPatients" layoutX="100.0" layoutY="14.0" prefHeight="301.0" prefWidth="490.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                           <columns>
-                            <TableColumn fx:id="tabPacjenciID" prefWidth="47.0" text="ID" />
-                            <TableColumn fx:id="tabPacjenciImie" prefWidth="124.0" text="Imię" />
-                              <TableColumn fx:id="tabPacjenciNazwisko" prefWidth="161.0" text="Nazwisko" />
-                              <TableColumn fx:id="tabPacjenciLogin" prefWidth="157.0" text="Login" />
+                            <TableColumn fx:id="tabPatientsID" prefWidth="47.0" text="ID" />
+                            <TableColumn fx:id="tabPatientsFirstName" prefWidth="124.0" text="Imię" />
+                              <TableColumn fx:id="tabPatientsLastName" prefWidth="161.0" text="Nazwisko" />
+                              <TableColumn fx:id="tabPatientsLogin" prefWidth="157.0" text="Login" />
                           </columns>
                         </TableView>
-                        <Button fx:id="usunPacjentaButton" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="25.0" prefWidth="60.0" text="Usuń" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="60.0" />
-                        <Button fx:id="edytujPacjentaButton" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#editPatient" prefHeight="25.0" prefWidth="60.0" text="Edytuj" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0" />
-                        <Button fx:id="refreshPacjenciButton" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" onAction="#refreshPatientsTable" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
+                        <Button fx:id="deletePatientButton" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="25.0" prefWidth="60.0" text="Usuń" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="60.0" />
+                        <Button fx:id="editPatientButton" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#editPatient" prefHeight="25.0" prefWidth="60.0" text="Edytuj" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0" />
+                        <Button fx:id="refreshPatientsButton" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" onAction="#refreshPatientsTable" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -43,11 +43,11 @@
                         <Label layoutX="30.0" layoutY="60.0" text="Nazwisko:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0" />
                         <Label layoutX="30.0" layoutY="94.0" text="Login:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="90.0" />
                         <Label layoutX="30.0" layoutY="131.0" text="Hasło:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="120.0" />
-                        <TextField fx:id="pacjentImieTF" layoutX="106.0" layoutY="26.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="26.0" />
-                        <TextField fx:id="pacjentNazwiskoTF" layoutX="105.0" layoutY="56.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="56.0" />
-                        <TextField fx:id="pacjentLoginTF" layoutX="105.0" layoutY="86.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="86.0" />
-                        <TextField fx:id="pacjentHasloTF" layoutX="105.0" layoutY="116.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="116.0" />
-                        <Button fx:id="dodajPacjentaButton" layoutX="31.0" layoutY="161.0" mnemonicParsing="false" onAction="#addPatient" text="Dodaj" />
+                        <TextField fx:id="patientFirstNameTextfield" layoutX="106.0" layoutY="26.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="26.0" />
+                        <TextField fx:id="patientLastNameTextfield" layoutX="105.0" layoutY="56.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="56.0" />
+                        <TextField fx:id="patientLoginTextfield" layoutX="105.0" layoutY="86.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="86.0" />
+                        <TextField fx:id="patientPasswordTextfield" layoutX="105.0" layoutY="116.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="116.0" />
+                        <Button fx:id="addPatientButton" layoutX="31.0" layoutY="161.0" mnemonicParsing="false" onAction="#addPatient" text="Dodaj" />
                      </children>
                   </AnchorPane>
               </content>
@@ -56,20 +56,20 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tabPiguly" layoutX="100.0" layoutY="14.0" prefHeight="301.0" prefWidth="490.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <TableView fx:id="tabNurses" layoutX="100.0" layoutY="14.0" prefHeight="301.0" prefWidth="490.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <columns>
-                              <TableColumn fx:id="tabPigulyID" prefWidth="47.0" text="ID" />
-                              <TableColumn fx:id="tabPigulyImie" prefWidth="94.0" text="Imię" />
-                              <TableColumn fx:id="tabPigulyNazwisko" prefWidth="127.0" text="Nazwisko" />
-                              <TableColumn fx:id="tabPigulyLogin" prefWidth="118.0" text="Login" />
-                              <TableColumn fx:id="tabPigulyLiczbaPacjentow" prefWidth="103.0" text="Liczba pacjentów" />
+                              <TableColumn fx:id="tabNurseID" prefWidth="47.0" text="ID" />
+                              <TableColumn fx:id="tabNurseFirstName" prefWidth="94.0" text="Imię" />
+                              <TableColumn fx:id="tabNurseLastName" prefWidth="127.0" text="Nazwisko" />
+                              <TableColumn fx:id="tabNurseLogin" prefWidth="118.0" text="Login" />
+                              <TableColumn fx:id="tabNurseNumberOfPatients" prefWidth="103.0" text="Liczba pacjentów" />
                            </columns>
                         </TableView>
-                        <Button fx:id="usunPiguleButton" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#deleteNurse" prefHeight="25.0" prefWidth="70.0" text="Usuń" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0" />
-                        <Button fx:id="edytujPiguleButton" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#editNurse" prefHeight="25.0" prefWidth="70.0" text="Edytuj" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="60.0" />
-                        <Button fx:id="przypiszPacjentaButton" layoutX="14.0" layoutY="137.0" mnemonicParsing="false" onAction="#assignPatient" prefHeight="47.0" prefWidth="70.0" text="Przypisz pacjenta" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="200.0" />
-                        <Button fx:id="refreshPigulyButton" layoutX="14.0" layoutY="206.0" mnemonicParsing="false" onAction="#refreshNursesTable" prefHeight="25.0" prefWidth="70.0" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
-                        <Button fx:id="usunPacjOdPigulyButton" layoutX="23.0" layoutY="233.0" mnemonicParsing="false" onAction="#resetNurseConnections" prefHeight="44.0" prefWidth="70.0" text="Usuń pacj." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="140.0" />
+                        <Button fx:id="deleteNurseButton" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#deleteNurse" prefHeight="25.0" prefWidth="70.0" text="Usuń" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0" />
+                        <Button fx:id="editNurseButton" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#editNurse" prefHeight="25.0" prefWidth="70.0" text="Edytuj" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="60.0" />
+                        <Button fx:id="assignPatientButton" layoutX="14.0" layoutY="137.0" mnemonicParsing="false" onAction="#assignPatient" prefHeight="47.0" prefWidth="70.0" text="Przypisz pacjenta" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="200.0" />
+                        <Button fx:id="refreshNursesTableButton" layoutX="14.0" layoutY="206.0" mnemonicParsing="false" onAction="#refreshNursesTable" prefHeight="25.0" prefWidth="70.0" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
+                        <Button fx:id="resetNurseConnectionsButton" layoutX="23.0" layoutY="233.0" mnemonicParsing="false" onAction="#resetNurseConnections" prefHeight="44.0" prefWidth="70.0" text="Usuń pacj." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="140.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -82,11 +82,11 @@
                         <Label layoutX="30.0" layoutY="60.0" text="Nazwisko:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0" />
                         <Label layoutX="30.0" layoutY="94.0" text="Login:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="90.0" />
                         <Label layoutX="30.0" layoutY="131.0" text="Hasło:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="120.0" />
-                        <TextField fx:id="pigulaImieTF" layoutX="106.0" layoutY="26.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="26.0" />
-                        <TextField fx:id="pigulaNazwiskoTF" layoutX="105.0" layoutY="56.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="56.0" />
-                        <TextField fx:id="pigulaLoginTF" layoutX="105.0" layoutY="86.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="86.0" />
-                        <TextField fx:id="pigulaHasloTF" layoutX="105.0" layoutY="116.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="116.0" />
-                        <Button fx:id="dodajPiguleButton" layoutX="31.0" layoutY="161.0" mnemonicParsing="false" onAction="#addNurse" text="Dodaj" />
+                        <TextField fx:id="nurseFirstNameTextfield" layoutX="106.0" layoutY="26.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="26.0" />
+                        <TextField fx:id="nurseLastNameTextfield" layoutX="105.0" layoutY="56.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="56.0" />
+                        <TextField fx:id="nurseLoginTextfield" layoutX="105.0" layoutY="86.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="86.0" />
+                        <TextField fx:id="nursePasswordTextfield" layoutX="105.0" layoutY="116.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="116.0" />
+                        <Button fx:id="addNurseButton" layoutX="31.0" layoutY="161.0" mnemonicParsing="false" onAction="#addNurse" text="Dodaj" />
                      </children>
                   </AnchorPane>
                </content>

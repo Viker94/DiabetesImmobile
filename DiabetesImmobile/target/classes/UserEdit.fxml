@@ -13,9 +13,9 @@
       <Label layoutX="12.0" layoutY="43.0" text="Nazwisko" />
       <Label layoutX="11.0" layoutY="77.0" text="Login" />
       <Label layoutX="11.0" layoutY="110.0" text="Hasło" />
-      <TextField fx:id="userImie" layoutX="97.0" layoutY="10.0" />
-      <TextField fx:id="userNazwisko" layoutX="97.0" layoutY="39.0" />
+      <TextField fx:id="userFirstName" layoutX="97.0" layoutY="10.0" />
+      <TextField fx:id="userLastName" layoutX="97.0" layoutY="39.0" />
       <TextField fx:id="userLogin" layoutX="97.0" layoutY="73.0" />
-      <TextField fx:id="userHaslo" layoutX="97.0" layoutY="106.0" />
+      <TextField fx:id="userPassword" layoutX="97.0" layoutY="106.0" />
    </children>
 </AnchorPane>

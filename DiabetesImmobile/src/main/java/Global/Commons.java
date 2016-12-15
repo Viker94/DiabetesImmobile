@@ -3,9 +3,6 @@ package Global;
 import Model.NursesForTable;
 import Model.UsersForTable;
 
-/**
- * Created by fishe on 29.11.2016.
- */
 public class Commons {
     private static String imie = "";
     private static String nazwisko = "";
@@ -16,6 +13,8 @@ public class Commons {
     private static int userOrNurse = 0; //1 - user, 2 - nurse
 
     //Gettery i settery
+    // !!! zrobione ręcznie, bo @Data lomboka z automatu pomija wszystkie static fields !!!
+
     public static String getImie() {
         return imie;
     }
@@ -63,9 +62,11 @@ public class Commons {
     public static void setUserOrNurse(int userOrNurse) {
         Commons.userOrNurse = userOrNurse;
     }
+
     //koniec getterów i setterów
 
 
     public static Connectivity conn = new Connectivity("http://dialisys.azurewebsites.net");
+    public static WindowControls windowControls = new WindowControls();
 
 }

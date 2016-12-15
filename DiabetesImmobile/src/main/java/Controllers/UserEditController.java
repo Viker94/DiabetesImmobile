@@ -1,7 +1,3 @@
-/**
- * Sample Skeleton for 'UserEdit.fxml' Controller Class
- */
-
 package Controllers;
 
 import Global.Commons;
@@ -9,68 +5,65 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class UserEditController {
 
-    Long id;
+    private Long id;
 
-    @FXML // fx:id="okButton"
-    private Button okButton; // Value injected by FXMLLoader
+    @FXML
+    private Button okButton;
 
-    @FXML // fx:id="cancelButton"
-    private Button cancelButton; // Value injected by FXMLLoader
+    @FXML
+    private Button cancelButton;
 
-    @FXML // fx:id="userImie"
-    private TextField userImie; // Value injected by FXMLLoader
+    @FXML
+    private TextField userFirstName;
 
-    @FXML // fx:id="userNazwisko"
-    private TextField userNazwisko; // Value injected by FXMLLoader
+    @FXML
+    private TextField userLastName;
 
-    @FXML // fx:id="userLogin"
-    private TextField userLogin; // Value injected by FXMLLoader
+    @FXML
+    private TextField userLogin;
 
-    @FXML // fx:id="userHaslo"
-    private TextField userHaslo; // Value injected by FXMLLoader
+    @FXML
+    private TextField userPassword;
 
     @FXML
     public void initialize() {
         if(Commons.getUserOrNurse()==1) {
-            userImie.setText(Commons.getSelectedUser().getFirstName());
-            userNazwisko.setText(Commons.getSelectedUser().getLastName());
+            userFirstName.setText(Commons.getSelectedUser().getFirstName());
+            userLastName.setText(Commons.getSelectedUser().getLastName());
             userLogin.setText(Commons.getSelectedUser().getLogin());
-            userHaslo.setText(Commons.getSelectedUser().getHaslo());
+            userPassword.setText(Commons.getSelectedUser().getHaslo());
             id = Commons.getSelectedUser().getId();
         }else if(Commons.getUserOrNurse()==2){
-            userImie.setText(Commons.getSelectedNurse().getFirstName());
-            userNazwisko.setText(Commons.getSelectedNurse().getLastName());
+            userFirstName.setText(Commons.getSelectedNurse().getFirstName());
+            userLastName.setText(Commons.getSelectedNurse().getLastName());
             userLogin.setText(Commons.getSelectedNurse().getLogin());
-            userHaslo.setText(Commons.getSelectedNurse().getPassword());
+            userPassword.setText(Commons.getSelectedNurse().getPassword());
             id = Commons.getSelectedNurse().getId();
         }
     }
 
     @FXML
-    void editUser(ActionEvent event) throws IOException {
-        String imie = userImie.getText();
-        String nazwisko = userNazwisko.getText();
+    void editUser() throws IOException {
+        String imie = userFirstName.getText();
+        String nazwisko = userLastName.getText();
         String login = userLogin.getText();
-        String haslo = userHaslo.getText();
+        String haslo = userPassword.getText();
         if(Commons.getUserOrNurse()==1) {
             Commons.conn.editUser(id, imie, nazwisko, login, haslo);
         }else if(Commons.getUserOrNurse()==2){
             Commons.conn.editNurse(id,imie,nazwisko,login,haslo);
         }
-        goBack(event);
+        goBack();
     }
 
     @FXML
-    void goBack(ActionEvent event) {
-        Stage stage = (Stage) userImie.getScene().getWindow();
-        stage.close();
-        stage.getScene().getWindow().hide();
+    void goBack() {
+        Commons.windowControls.closeWindow(cancelButton);
     }
 
 }

@@ -7,16 +7,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="448.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SelectPatientController">
    <children>
-      <TableView fx:id="tabPacjenci" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <TableView fx:id="tabPatients" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
         <columns>
-          <TableColumn fx:id="tabPacjenciID" prefWidth="41.0" text="ID" />
-          <TableColumn fx:id="tabPacjenciImie" prefWidth="99.0" text="Imię" />
-            <TableColumn fx:id="tabPacjenciNazwisko" prefWidth="102.0" text="Nazwisko" />
-            <TableColumn fx:id="tabPacjenciLogin" prefWidth="59.0" text="Login" />
-            <TableColumn fx:id="tabPacjenciLiczbaPielegniarek" prefWidth="118.0" text="Liczba pielęgniarek" />
+          <TableColumn fx:id="tabPatientsID" prefWidth="41.0" text="ID" />
+          <TableColumn fx:id="tabPatientsFirstName" prefWidth="99.0" text="Imię" />
+            <TableColumn fx:id="tabPatientsLastName" prefWidth="102.0" text="Nazwisko" />
+            <TableColumn fx:id="tabPatientsLogin" prefWidth="59.0" text="Login" />
+            <TableColumn fx:id="tabPatientsNumberOfNurses" prefWidth="118.0" text="Liczba pielęgniarek" />
         </columns>
       </TableView>
-      <Button fx:id="wybierzButton" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#wybierz" text="Wybierz" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
-      <Button fx:id="anulujButton" layoutX="89.0" layoutY="361.0" mnemonicParsing="false" onAction="#anuluj" text="Anuluj" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="85.0" />
+      <Button fx:id="selectButton" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#select" text="Wybierz" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="cancelButton" layoutX="89.0" layoutY="361.0" mnemonicParsing="false" onAction="#cancel" text="Anuluj" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="85.0" />
+      <Button fx:id="refreshButton" layoutX="147.0" layoutY="361.0" mnemonicParsing="false" onAction="#refreshTable" text="Odśwież" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="147.0" />
    </children>
 </AnchorPane>

@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * Created by fishe on 29.11.2016.
- */
+//Klasa zbierająca dane o Userach do wypełnienia tabel
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
