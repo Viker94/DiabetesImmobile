@@ -61,11 +61,11 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="waterChart" text="Woda">
+            <Tab text="Woda">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <LineChart layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                        <LineChart fx:id="waterChart" layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                            <xAxis>
                               <CategoryAxis side="BOTTOM" />
                            </xAxis>
@@ -77,11 +77,11 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="sodiumChart" text="Sód">
+            <Tab text="Sód">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <LineChart layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                        <LineChart fx:id="sodiumChart" layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                            <xAxis>
                               <CategoryAxis side="BOTTOM" />
                            </xAxis>

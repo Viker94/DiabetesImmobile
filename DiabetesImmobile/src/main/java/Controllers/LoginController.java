@@ -42,6 +42,7 @@ public class LoginController {
         Nurse log = Commons.conn.checkLogin(login,passwd);
         if(log==null) JOptionPane.showMessageDialog(null,"Podano błędny login i/lub hasło");
         else {
+            Commons.setId(log.getId());
             Commons.setImie(log.getFirstName());
             Commons.setNazwisko(log.getLastName());
             Commons.setLogin(log.getLogin());

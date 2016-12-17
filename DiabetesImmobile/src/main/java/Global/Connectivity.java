@@ -177,7 +177,10 @@ public class Connectivity {
         UsersForTable temp = null;
         for(int i=0;i<patients.size();i++){
             temp = new UsersForTable(patients.get(i).getId(),patients.get(i).getFirstName(),
-                    patients.get(i).getLastName(),patients.get(i).getLogin().getLogin(),patients.get(i).getLogin().getPasswd());
+                    patients.get(i).getLastName(),patients.get(i).getLogin().getLogin(),patients.get(i).getLogin().getPasswd(),
+                    patients.get(i).getPotassium(),patients.get(i).getWater(),patients.get(i).getSodium(),
+                    patients.get(i).getLimitPotassium(),patients.get(i).getLimitWater(),patients.get(i).getLimitSodium(),
+                    patients.get(i).getNextVisit());
             ret.add(temp);
             restart();
         }
@@ -206,7 +209,10 @@ public class Connectivity {
         UsersForTable temp = null;
         for(int i=0;i<patients.size();i++){
             temp = new UsersForTable(patients.get(i).getId(),patients.get(i).getFirstName(),
-                    patients.get(i).getLastName(),patients.get(i).getLogin().getLogin(),patients.get(i).getLogin().getPasswd());
+                    patients.get(i).getLastName(),patients.get(i).getLogin().getLogin(),patients.get(i).getLogin().getPasswd(),
+                    patients.get(i).getPotassium(),patients.get(i).getWater(),patients.get(i).getSodium(),
+                    patients.get(i).getLimitPotassium(),patients.get(i).getLimitWater(),patients.get(i).getLimitSodium(),
+                    patients.get(i).getNextVisit());
             ret.add(temp);
             restart();
         }

@@ -4,6 +4,8 @@ import Model.NursesForTable;
 import Model.UsersForTable;
 
 public class Commons {
+
+    private static long id = 0;
     private static String imie = "";
     private static String nazwisko = "";
     private static String login = "";
@@ -14,6 +16,14 @@ public class Commons {
 
     //Gettery i settery
     // !!! zrobione ręcznie, bo @Data lomboka z automatu pomija wszystkie static fields !!!
+
+    public static long getId() {
+        return id;
+    }
+
+    public static void setId(long id) {
+        Commons.id = id;
+    }
 
     public static String getImie() {
         return imie;

@@ -56,7 +56,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tabNurses" layoutX="100.0" layoutY="14.0" prefHeight="301.0" prefWidth="490.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <TableView fx:id="tabNurses" layoutX="126.0" layoutY="14.0" prefHeight="301.0" prefWidth="464.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <columns>
                               <TableColumn fx:id="tabNurseID" prefWidth="47.0" text="ID" />
                               <TableColumn fx:id="tabNurseFirstName" prefWidth="94.0" text="Imię" />
@@ -65,12 +65,10 @@
                               <TableColumn fx:id="tabNurseNumberOfPatients" prefWidth="103.0" text="Liczba pacjentów" />
                            </columns>
                         </TableView>
-                        <Button fx:id="deleteNurseButton" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#deleteNurse" prefHeight="25.0" prefWidth="70.0" text="Usuń" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0" />
-                        <Button fx:id="editNurseButton" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#editNurse" prefHeight="25.0" prefWidth="70.0" text="Edytuj" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="60.0" />
-                        <Button fx:id="assignPatientButton" layoutX="14.0" layoutY="137.0" mnemonicParsing="false" onAction="#assignPatient" prefHeight="47.0" prefWidth="70.0" text="Przypisz pacjenta" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="200.0" />
-                        <Button fx:id="refreshNursesTableButton" layoutX="14.0" layoutY="206.0" mnemonicParsing="false" onAction="#refreshNursesTable" prefHeight="25.0" prefWidth="70.0" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
-                        <Button fx:id="resetNurseConnectionsButton" layoutX="23.0" layoutY="233.0" mnemonicParsing="false" onAction="#resetNurseConnections" prefHeight="44.0" prefWidth="70.0" text="Usuń pacj." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="140.0" />
-                        <Button fx:id="manageAssingmentsButton" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#manageAssignments" text="zarz przyp" />
+                        <Button fx:id="deleteNurseButton" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#deleteNurse" prefHeight="25.0" prefWidth="94.0" text="Usuń" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0" />
+                        <Button fx:id="editNurseButton" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#editNurse" prefHeight="25.0" prefWidth="93.0" text="Edytuj" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="60.0" />
+                        <Button fx:id="refreshNursesTableButton" layoutX="14.0" layoutY="206.0" mnemonicParsing="false" onAction="#refreshNursesTable" prefHeight="25.0" prefWidth="95.0" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
+                        <Button fx:id="manageAssingmentsButton" layoutX="14.0" layoutY="136.0" mnemonicParsing="false" onAction="#manageAssignments" prefHeight="45.0" prefWidth="96.0" text="Zarządzaj pacjentami" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="140.0" />
                      </children>
                   </AnchorPane>
                </content>

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Global.Commons;
+import Model.UsersForTable;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
@@ -11,6 +12,8 @@ import javafx.scene.control.Tab;
 import java.io.IOException;
 
 public class MainScreenPatientController {
+
+    private UsersForTable user;
 
     @FXML
     private ProgressBar potassiumBar;
@@ -52,10 +55,10 @@ public class MainScreenPatientController {
     private LineChart<?, ?> potassiumChart;
 
     @FXML
-    private Tab waterChart;
+    private LineChart<?, ?> waterChart;
 
     @FXML
-    private Tab sodiumChart;
+    private LineChart<?, ?> sodiumChart;
 
     @FXML
     private Label firstAndLastName;
@@ -83,15 +86,18 @@ public class MainScreenPatientController {
 
     @FXML
     void initialize() {
+        user = Commons.getSelectedUser();
         refreshLimits();
         refreshPotassium();
         refreshSodium();
         refreshWater();
+        firstAndLastName.setText(Commons.getImie()+" "+Commons.getNazwisko());
+        patientFirstAndLastName.setText(Commons.getSelectedUser().getFirstName()+" "+Commons.getSelectedUser().getLastName());
     }
 
     @FXML
     void backToList() {
-
+        Commons.windowControls.closeWindow(backToList);
     }
 
     @FXML
@@ -106,7 +112,21 @@ public class MainScreenPatientController {
 
     @FXML
     void refreshPotassium() {
-
+        potassiumCurrent.setText(user.getPotassium()+"mg");
+        waterCurrent.setText(user.getWater()+"mg");
+        sodiumCurrent.setText(user.getSodium()+"mg");
+        potassiumLimit.setText(user.getLimitPotassium()+"mg");
+        waterLimit.setText(user.getLimitWater()+"mg");
+        sodiumLimit.setText(user.getLimitSodium()+"mg");
+        double potassiumPer = user.getPotassium() / user.getLimitPotassium();
+        double waterPer = user.getWater() / user.getLimitWater();
+        double sodiumPer = user.getSodium() / user.getLimitSodium();
+        potassiumPercent.setText(potassiumPer*100+"%");
+        waterPercent.setText(waterPer*100+"%");
+        sodiumPercent.setText(sodiumPer*100+"%");
+        potassiumBar.setProgress(potassiumPer);
+        waterBar.setProgress(waterPer);
+        sodiumBar.setProgress(sodiumPer);
     }
 
     @FXML
