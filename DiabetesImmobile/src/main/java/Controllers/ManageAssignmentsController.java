@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,7 +14,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.util.List;
 
-public class SelectPatientController {
+public class ManageAssignmentsController {
+
+    @FXML
+    private Label firstLastName;
 
     @FXML
     private TableView<UsersForTable> tabPatients;
@@ -31,39 +35,47 @@ public class SelectPatientController {
     private TableColumn<UsersForTable, String> tabPatientsLogin;
 
     @FXML
-    private Button selectButton;
-
-    @FXML
-    private Button cancelButton;
+    private Button finishButton;
 
     @FXML
     private Button refreshButton;
 
     @FXML
-    void initialize() throws IOException {
+    private Button addPatientButton;
+
+    @FXML
+    private Button removePatientButton;
+
+    @FXML
+    public void initialize() throws IOException {
+        firstLastName.setText(Commons.getSelectedNurse().getFirstName()+" "+ Commons.getSelectedNurse().getLastName());
         refreshTable();
     }
 
     @FXML
-    void cancel() {
-        Commons.windowControls.closeWindow(cancelButton);
+    void addPatient() throws IOException {
+        Commons.windowControls.newWindow("SelectPatient.fxml","Użytkownicy");
     }
 
     @FXML
-    void select() throws IOException {
-        UsersForTable selected = tabPatients.getSelectionModel().getSelectedItem();
-        if(selected!=null) {
-            Commons.conn.assignSingleUser(Commons.getSelectedNurse().getId(),selected.getId());
+    void removePatient() throws IOException {
+        UsersForTable user = tabPatients.getSelectionModel().getSelectedItem();
+        if(user!=null){
+            Commons.conn.deassignSingleUser(Commons.getSelectedNurse().getId(),user.getId());
             refreshTable();
         }
     }
 
     @FXML
+    void finish() {
+
+        Commons.windowControls.closeWindow(finishButton);
+    }
+
+    @FXML
     void refreshTable() throws IOException {
-        List<UsersForTable> nurseUsers = Commons.conn.getPatientsOfNurse(Commons.getSelectedNurse().getId());
-        List<UsersForTable> allUsers = Commons.conn.getPatients();
-        allUsers.removeAll(nurseUsers);
-        ObservableList<UsersForTable> ousers = FXCollections.observableArrayList(allUsers);
+        List<UsersForTable> users = Commons.conn.getPatientsOfNurse(Commons.getSelectedNurse().getId());
+        ObservableList<UsersForTable> ousers = FXCollections.observableArrayList(users);
         tabPatientsID.setCellValueFactory(new PropertyValueFactory<UsersForTable, Long>("id"));
         tabPatientsFirstName.setCellValueFactory(new PropertyValueFactory<UsersForTable, String>("firstName"));
         tabPatientsLastName.setCellValueFactory(new PropertyValueFactory<UsersForTable, String>("lastName"));

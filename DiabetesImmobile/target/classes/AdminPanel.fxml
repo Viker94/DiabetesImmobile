@@ -70,6 +70,7 @@
                         <Button fx:id="assignPatientButton" layoutX="14.0" layoutY="137.0" mnemonicParsing="false" onAction="#assignPatient" prefHeight="47.0" prefWidth="70.0" text="Przypisz pacjenta" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="200.0" />
                         <Button fx:id="refreshNursesTableButton" layoutX="14.0" layoutY="206.0" mnemonicParsing="false" onAction="#refreshNursesTable" prefHeight="25.0" prefWidth="70.0" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
                         <Button fx:id="resetNurseConnectionsButton" layoutX="23.0" layoutY="233.0" mnemonicParsing="false" onAction="#resetNurseConnections" prefHeight="44.0" prefWidth="70.0" text="Usuń pacj." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="140.0" />
+                        <Button fx:id="manageAssingmentsButton" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#manageAssignments" text="zarz przyp" />
                      </children>
                   </AnchorPane>
                </content>

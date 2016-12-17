@@ -12,8 +12,7 @@
           <TableColumn fx:id="tabPatientsID" prefWidth="41.0" text="ID" />
           <TableColumn fx:id="tabPatientsFirstName" prefWidth="99.0" text="Imię" />
             <TableColumn fx:id="tabPatientsLastName" prefWidth="102.0" text="Nazwisko" />
-            <TableColumn fx:id="tabPatientsLogin" prefWidth="59.0" text="Login" />
-            <TableColumn fx:id="tabPatientsNumberOfNurses" prefWidth="118.0" text="Liczba pielęgniarek" />
+            <TableColumn fx:id="tabPatientsLogin" prefWidth="87.0" text="Login" />
         </columns>
       </TableView>
       <Button fx:id="selectButton" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#select" text="Wybierz" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />

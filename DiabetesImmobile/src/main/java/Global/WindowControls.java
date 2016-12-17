@@ -25,7 +25,7 @@ public class WindowControls {
         Stage stageNew = new Stage();
         stageNew.setTitle(title);
         stageNew.setScene(new Scene(root));
-        stageNew.show();
+        stageNew.showAndWait();
     }
     public void replaceWindow(String fxmlFile, String title, Button anyButton) throws IOException {
         Stage stage = (Stage) anyButton.getScene().getWindow();

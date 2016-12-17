@@ -81,9 +81,6 @@ public class AdminPanelController {
     private Button editNurseButton;
 
     @FXML
-    private Button assignPatientButton;
-
-    @FXML
     private TextField nurseFirstNameTextfield;
 
     @FXML
@@ -105,7 +102,7 @@ public class AdminPanelController {
     private Button refreshNursesTableButton;
 
     @FXML
-    private Button resetNurseConnectionsButton;
+    private Button manageAssignmentsButton;
 
     @FXML
     public void initialize() throws IOException {
@@ -117,6 +114,16 @@ public class AdminPanelController {
     @FXML
     void logout() throws IOException {
         Commons.windowControls.logout(logoutButton);
+    }
+
+    @FXML
+    void manageAssignments() throws IOException {
+        NursesForTable nurse = tabNurses.getSelectionModel().getSelectedItem();
+        if(nurse!=null){
+            Commons.setSelectedNurse(nurse);
+            Commons.windowControls.newWindow("ManageAssignments.fxml","Zarządzanie przypisaniami");
+            refreshPatientsTable();
+        }
     }
 
     @FXML
@@ -167,11 +174,6 @@ public class AdminPanelController {
     }
 
     @FXML
-    void assignPatient() {
-
-    }
-
-    @FXML
     void deletePatient() throws IOException {
         if(tabPatients.getSelectionModel().getSelectedItem()!=null) {
             long id = tabPatients.getSelectionModel().getSelectedItem().getId();
@@ -208,13 +210,5 @@ public class AdminPanelController {
         tabNurseLogin.setCellValueFactory(new PropertyValueFactory<NursesForTable, String>("login"));
         tabNurseNumberOfPatients.setCellValueFactory(new PropertyValueFactory<NursesForTable, Integer>("liczbaPacjentow"));
         tabNurses.setItems(opiele);
-    }
-
-    @FXML
-    void resetNurseConnections() throws IOException {
-        if(tabNurses.getSelectionModel().getSelectedItem()!=null) {
-            long id = tabNurses.getSelectionModel().getSelectedItem().getId();
-            Commons.conn.resetPolaczenPiguly(id);
-        }
     }
 }

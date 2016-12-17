@@ -28,7 +28,7 @@ public class Connectivity {
     }
 
 
-    public List<Product> getProducts() throws IOException {
+    public List<Product> getProducts() throws IOException { //TODO
         //TO NIE ZADZIAłA, SPRAWDŹ JAK DEKODOWANE JEST getNurses(), tak działa
         List<Product> products = null;
         Product tmp = null;
@@ -54,7 +54,21 @@ public class Connectivity {
         restart();
     }
 
-    public void resetPolaczenPiguly(long id) throws IOException {
+    public void assignSingleUser(long nurseId, long userId) throws IOException {
+        HttpPost postRequest = new HttpPost(
+                this.address+"/nurseAddPatient/"+nurseId+"/"+userId);
+        client.execute(postRequest);
+        restart();
+    }
+
+    public void deassignSingleUser(long nurseId, long userId) throws IOException {
+        HttpPost postRequest = new HttpPost(
+                this.address+"/nurseDelOnePatient/"+nurseId+"/"+userId);
+        client.execute(postRequest);
+        restart();
+    }
+
+    public void resetNurseConnections(long id) throws IOException {
         HttpPost postRequest = new HttpPost(
                 this.address+"/nurseDelPatients/"+id);
         client.execute(postRequest);
@@ -178,16 +192,41 @@ public class Connectivity {
         return ret;
     }
 
+    public List<UsersForTable> getPatientsOfNurse(long nurseId) throws IOException { //zwraca liste pacjentów danej pielęgniarki
+        List<User> patients = null;
+        List<UsersForTable> ret = new ArrayList<UsersForTable>();
+        HttpGet getRequest = new HttpGet(
+                this.address+"/nursePatients/"+nurseId);
+        getRequest.addHeader("accept", "application/json");
+        HttpResponse response = client.execute(getRequest);
+
+        String json = "";
+        String tmp = null;
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader((response.getEntity().getContent())));
+        while((tmp=br.readLine())!=null){
+            json+=tmp;
+        }
+
+        patients = mapper.readValue(json,new TypeReference<List<User>>(){});
+        restart();
+        UsersForTable temp = null;
+        for(int i=0;i<patients.size();i++){
+            temp = new UsersForTable(patients.get(i).getId(),patients.get(i).getFirstName(),
+                    patients.get(i).getLastName(),patients.get(i).getLogin().getLogin(),patients.get(i).getLogin().getPasswd());
+            ret.add(temp);
+            restart();
+        }
+
+        return ret;
+    }
+
     public Nurse checkLogin(String login, String passwd) throws IOException { //sprawdza istnienie konta
         HttpGet getRequest = new HttpGet(                                       //zwraca obiekt Login lub null
                 this.address+"/nurseLogin/"+login+"/"+passwd);
         getRequest.addHeader("accept", "application/json");
         HttpResponse response = client.execute(getRequest);
 
-        if (response.getStatusLine().getStatusCode() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatusLine().getStatusCode());
-        }
         String json = null;
         BufferedReader br = new BufferedReader(
                 new InputStreamReader((response.getEntity().getContent())));
