@@ -27,26 +27,6 @@ public class Connectivity {
 
     }
 
-
-    public List<Product> getProducts() throws IOException { //TODO
-        //TO NIE ZADZIAłA, SPRAWDŹ JAK DEKODOWANE JEST getNurses(), tak działa
-        List<Product> products = null;
-        Product tmp = null;
-        HttpGet getRequest = new HttpGet(
-                this.address+"/products");
-        getRequest.addHeader("accept", "application/json");
-        HttpResponse response = client.execute(getRequest);
-        String json = null;
-        BufferedReader br = new BufferedReader(
-                new InputStreamReader((response.getEntity().getContent())));
-        while((json = br.readLine())!=null){
-            tmp = mapper.readValue(json,Product.class);
-            products.add(tmp);
-        }
-        restart();
-        return products;
-    }
-
     public void addNurse(String imie,String nazwisko,String login,String haslo) throws IOException {
         HttpPost postRequest = new HttpPost(
                 this.address+"/nurse/"+imie+"/"+nazwisko+"/"+login+"/"+haslo);
@@ -68,7 +48,7 @@ public class Connectivity {
         restart();
     }
 
-    public void resetNurseConnections(long id) throws IOException {
+    public void resetNurseConnections(long id) throws IOException { //teraz już useless, zrobiłem lepsze mechanizmy zarządzania
         HttpPost postRequest = new HttpPost(
                 this.address+"/nurseDelPatients/"+id);
         client.execute(postRequest);
@@ -158,6 +138,24 @@ public class Connectivity {
         return ret;
     }
 
+    public List<Product> getProducts() throws IOException {
+        List<Product> products = null;
+        HttpGet getRequest = new HttpGet(
+                this.address+"/products");
+        getRequest.addHeader("accept", "application/json");
+        HttpResponse response = client.execute(getRequest);
+        String json = "";
+        String tmp = null;
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader((response.getEntity().getContent())));
+        while((tmp = br.readLine())!=null){
+            json+=tmp;
+        }
+        products = mapper.readValue(json, new TypeReference<List<Product>>(){});
+        restart();
+        return products;
+    }
+
     public List<UsersForTable> getPatients() throws IOException { //zwraca liste pacjentów
         List<User> patients = null;
         List<UsersForTable> ret = new ArrayList<UsersForTable>();
@@ -165,11 +163,6 @@ public class Connectivity {
                 this.address+"/users");
         getRequest.addHeader("accept", "application/json");
         HttpResponse response = client.execute(getRequest);
-
-        if (response.getStatusLine().getStatusCode() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatusLine().getStatusCode());
-        }
 
         String json = "";
         String tmp = null;
