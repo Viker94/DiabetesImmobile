@@ -1,15 +1,19 @@
 package Controllers;
 
 import Global.Commons;
+import Model.Consumption;
+import Model.ConsumptionHistory;
 import Model.UsersForTable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainScreenPatientController {
 
@@ -85,12 +89,37 @@ public class MainScreenPatientController {
     private Button refreshLimitsButton;
 
     @FXML
+    private Button historyRefreshButton;
+
+    @FXML
+    private TableView<ConsumptionHistory> tabHistory;
+
+    @FXML
+    private TableColumn<ConsumptionHistory, String> tabHistoryDate;
+
+    @FXML
+    private TableColumn<ConsumptionHistory, String> tabHistoryProduct;
+
+    @FXML
+    private TableColumn<ConsumptionHistory, Integer> tabHistoryQuantity;
+
+    @FXML
+    private TableColumn<ConsumptionHistory, String> tabHistoryPotassium;
+
+    @FXML
+    private TableColumn<ConsumptionHistory, String> tabHistorySodium;
+
+    @FXML
+    private TableColumn<ConsumptionHistory, String> tabHistoryWater;
+
+    @FXML
     void initialize() {
         user = Commons.getSelectedUser();
         refreshLimits();
         refreshPotassium();
         refreshSodium();
         refreshWater();
+        refreshHistory();
         firstAndLastName.setText(Commons.getImie()+" "+Commons.getNazwisko());
         patientFirstAndLastName.setText(Commons.getSelectedUser().getFirstName()+" "+Commons.getSelectedUser().getLastName());
     }
@@ -106,18 +135,41 @@ public class MainScreenPatientController {
     }
 
     @FXML
-    void refreshLimits() {
+    void refreshHistory(){
+        List<ConsumptionHistory> historia = new ArrayList<ConsumptionHistory>();
+        List<Consumption> cons = Commons.getSelectedUser().getConsumed();
+        Consumption temp;
+        ConsumptionHistory tmpH;
+        for(int i=0;i<cons.size();i++){
+            temp = cons.get(i);
+            tmpH = new ConsumptionHistory();
+            tmpH.setData(temp.getDate().toString());
+            tmpH.setProdukt(temp.getProduct().getName());
+            tmpH.setIlosc(temp.getAmount());
+            tmpH.setDeltaPotasu(temp.getProduct().getPotassium()*temp.getAmount()+" mg");
+            tmpH.setDeltaSodu(temp.getProduct().getSodium()*temp.getAmount()+" mg");
+            tmpH.setDeltaWody(temp.getProduct().getWater()*temp.getAmount()+" mg");
+            historia.add(tmpH);
+        }
+        ObservableList<ConsumptionHistory> consHist = FXCollections.observableArrayList(historia);
+        tabHistoryDate.setCellValueFactory(new PropertyValueFactory<ConsumptionHistory, String>("data"));
+        tabHistoryProduct.setCellValueFactory(new PropertyValueFactory<ConsumptionHistory, String>("produkt"));
+        tabHistoryQuantity.setCellValueFactory(new PropertyValueFactory<ConsumptionHistory, Integer>("ilosc"));
+        tabHistoryPotassium.setCellValueFactory(new PropertyValueFactory<ConsumptionHistory, String>("deltaPotasu"));
+        tabHistorySodium.setCellValueFactory(new PropertyValueFactory<ConsumptionHistory, String>("deltaSodu"));
+        tabHistoryWater.setCellValueFactory(new PropertyValueFactory<ConsumptionHistory, String>("deltaWody"));
+        tabHistory.setItems(consHist);
 
     }
 
     @FXML
-    void refreshPotassium() {
-        potassiumCurrent.setText(user.getPotassium()+"mg");
-        waterCurrent.setText(user.getWater()+"mg");
-        sodiumCurrent.setText(user.getSodium()+"mg");
-        potassiumLimit.setText(user.getLimitPotassium()+"mg");
-        waterLimit.setText(user.getLimitWater()+"mg");
-        sodiumLimit.setText(user.getLimitSodium()+"mg");
+    void refreshLimits() {
+        potassiumCurrent.setText(user.getPotassium()+" mg");
+        waterCurrent.setText(user.getWater()+" mg");
+        sodiumCurrent.setText(user.getSodium()+" mg");
+        potassiumLimit.setText(user.getLimitPotassium()+" mg");
+        waterLimit.setText(user.getLimitWater()+" mg");
+        sodiumLimit.setText(user.getLimitSodium()+" mg");
         double potassiumPer = user.getPotassium() / user.getLimitPotassium();
         double waterPer = user.getWater() / user.getLimitWater();
         double sodiumPer = user.getSodium() / user.getLimitSodium();
@@ -127,6 +179,11 @@ public class MainScreenPatientController {
         potassiumBar.setProgress(potassiumPer);
         waterBar.setProgress(waterPer);
         sodiumBar.setProgress(sodiumPer);
+    }
+
+    @FXML
+    void refreshPotassium() {
+
     }
 
     @FXML

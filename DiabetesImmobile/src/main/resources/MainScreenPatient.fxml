@@ -8,6 +8,8 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -90,6 +92,25 @@
                            </yAxis>
                         </LineChart>
                         <Button fx:id="refreshSodiumButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshSodium" text="Odśwież" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Historia posiłków">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabHistory" layoutX="100.0" layoutY="14.0" prefHeight="281.0" prefWidth="490.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0">
+                          <columns>
+                            <TableColumn fx:id="tabHistoryDate" prefWidth="75.0" text="Data" />
+                            <TableColumn fx:id="tabHistoryProduct" prefWidth="75.0" text="Produkt" />
+                              <TableColumn fx:id="tabHistoryQuantity" prefWidth="75.0" text="Ilość" />
+                              <TableColumn fx:id="tabHistoryPotassium" prefWidth="75.0" text="Δ potas" />
+                              <TableColumn fx:id="tabHistorySodium" prefWidth="75.0" text="Δ sód" />
+                              <TableColumn fx:id="tabHistoryWater" prefWidth="75.0" text="Δ woda" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="historyRefreshButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshHistory" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
                      </children>
                   </AnchorPane>
               </content>

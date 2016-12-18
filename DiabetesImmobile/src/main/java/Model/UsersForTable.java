@@ -25,4 +25,5 @@ public class UsersForTable {
     private double limitWater;
     private double limitSodium;
     private Date nextVisit;
+    private List<Consumption> consumed;
 }

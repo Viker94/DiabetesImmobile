@@ -180,7 +180,7 @@ public class Connectivity {
                     patients.get(i).getLastName(),patients.get(i).getLogin().getLogin(),patients.get(i).getLogin().getPasswd(),
                     patients.get(i).getPotassium(),patients.get(i).getWater(),patients.get(i).getSodium(),
                     patients.get(i).getLimitPotassium(),patients.get(i).getLimitWater(),patients.get(i).getLimitSodium(),
-                    patients.get(i).getNextVisit());
+                    patients.get(i).getNextVisit(),patients.get(i).getConsumed());
             ret.add(temp);
             restart();
         }
@@ -212,7 +212,7 @@ public class Connectivity {
                     patients.get(i).getLastName(),patients.get(i).getLogin().getLogin(),patients.get(i).getLogin().getPasswd(),
                     patients.get(i).getPotassium(),patients.get(i).getWater(),patients.get(i).getSodium(),
                     patients.get(i).getLimitPotassium(),patients.get(i).getLimitWater(),patients.get(i).getLimitSodium(),
-                    patients.get(i).getNextVisit());
+                    patients.get(i).getNextVisit(),patients.get(i).getConsumed());
             ret.add(temp);
             restart();
         }
