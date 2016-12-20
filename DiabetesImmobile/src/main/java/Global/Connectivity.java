@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Connectivity {
@@ -27,6 +28,30 @@ public class Connectivity {
 
     }
 
+    public User refreshSingleUser(long id) throws IOException {
+        User temp = null;
+        HttpGet getRequest = new HttpGet(                                       //zwraca obiekt Login lub null
+                this.address+"/user/"+id);
+        getRequest.addHeader("accept", "application/json");
+        HttpResponse response = client.execute(getRequest);
+
+        String json = null;
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader((response.getEntity().getContent())));
+        json = br.readLine();
+        if(json!=null){
+            temp = mapper.readValue(json,User.class);
+        }
+        restart();
+        return temp;
+    }
+    public void newVisit(long id,Date date) throws IOException {
+        String formattedDate = (date.getYear()+1900)+"-"+(date.getMonth()+1)+"-"+date.getDate();
+        HttpPost postRequest = new HttpPost(
+                this.address+"/userVisit/"+id+"/"+formattedDate);
+        client.execute(postRequest);
+        restart();
+    }
     public void addNurse(String imie,String nazwisko,String login,String haslo) throws IOException {
         HttpPost postRequest = new HttpPost(
                 this.address+"/nurse/"+imie+"/"+nazwisko+"/"+login+"/"+haslo);

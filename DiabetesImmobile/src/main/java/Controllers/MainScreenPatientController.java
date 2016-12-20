@@ -3,6 +3,7 @@ package Controllers;
 import Global.Commons;
 import Model.Consumption;
 import Model.ConsumptionHistory;
+import Model.User;
 import Model.UsersForTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainScreenPatientController {
@@ -92,6 +95,15 @@ public class MainScreenPatientController {
     private Button historyRefreshButton;
 
     @FXML
+    private Button acceptDateButton;
+
+    @FXML
+    private DatePicker newDatePicker;
+
+    @FXML
+    private Label plannedDateLabel;
+
+    @FXML
     private TableView<ConsumptionHistory> tabHistory;
 
     @FXML
@@ -122,6 +134,8 @@ public class MainScreenPatientController {
         refreshHistory();
         firstAndLastName.setText(Commons.getImie()+" "+Commons.getNazwisko());
         patientFirstAndLastName.setText(Commons.getSelectedUser().getFirstName()+" "+Commons.getSelectedUser().getLastName());
+        if(user.getNextVisit()!=null) plannedDateLabel.setText(user.getNextVisit().toString());
+        else plannedDateLabel.setText("Nie ustalono");
     }
 
     @FXML
@@ -132,6 +146,17 @@ public class MainScreenPatientController {
     @FXML
     void logout() throws IOException {
         Commons.windowControls.logout(logoutButton);
+    }
+
+    @FXML
+    void acceptNewDate() throws IOException {
+        Date temp = java.sql.Date.valueOf(newDatePicker.getValue()); //błąd bo retarded środowisko, ale kompiluje sie i działa
+        Commons.conn.newVisit(user.getId(), temp);
+        User tmp = Commons.conn.refreshSingleUser(user.getId());
+        Commons.getSelectedUser().setNextVisit(tmp.getNextVisit());
+        user = Commons.getSelectedUser();
+        if(user.getNextVisit()!=null)plannedDateLabel.setText(user.getNextVisit().toString());
+        else plannedDateLabel.setText("Nie ustalono");
     }
 
     @FXML
