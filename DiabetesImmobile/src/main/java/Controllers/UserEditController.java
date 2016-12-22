@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class UserEditController {
@@ -53,12 +54,24 @@ public class UserEditController {
         String nazwisko = userLastName.getText();
         String login = userLogin.getText();
         String haslo = userPassword.getText();
-        if(Commons.getUserOrNurse()==1) {
-            Commons.conn.editUser(id, imie, nazwisko, login, haslo);
-        }else if(Commons.getUserOrNurse()==2){
-            Commons.conn.editNurse(id,imie,nazwisko,login,haslo);
+        if(imie.trim().equals("") || nazwisko.trim().equals("") || login.trim().equals("") || haslo.trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Wartości nie mogą być puste","Błąd",JOptionPane.ERROR_MESSAGE);
         }
-        goBack();
+        else {
+            if (Commons.getUserOrNurse() == 1) {
+                if (Commons.conn.checkUserAvailibility(login.trim(), id)) {
+                    Commons.conn.editUser(id, imie.trim(), nazwisko.trim(), login.trim(), haslo.trim());
+                    goBack();
+                } else
+                    JOptionPane.showMessageDialog(null, "Podany login jest już zajęty", "Błąd", JOptionPane.ERROR_MESSAGE);
+            } else if (Commons.getUserOrNurse() == 2) {
+                if (Commons.conn.checkNurseAvailibility(login.trim(), id)) {
+                    Commons.conn.editNurse(id, imie.trim(), nazwisko.trim(), login.trim(), haslo.trim());
+                    goBack();
+                } else
+                    JOptionPane.showMessageDialog(null, "Podany login jest już zajęty", "Błąd", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     @FXML

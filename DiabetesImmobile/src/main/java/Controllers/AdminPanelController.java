@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -132,12 +133,22 @@ public class AdminPanelController {
         String nazwisko = patientLastNameTextfield.getText();
         String login = patientLoginTextfield.getText();
         String password = patientPasswordTextfield.getText();
+        if(imie.trim().equals("") || nazwisko.trim().equals("") || login.trim().equals("") || password.trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Wartości nie mogą być puste","Błąd",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            if(Commons.conn.checkUserAvailibility(login.trim(),null)){
+                Commons.conn.addUser(imie.trim(),nazwisko.trim(),login.trim(),password.trim());
+                patientFirstNameTextfield.setText("");
+                patientLastNameTextfield.setText("");
+                patientPasswordTextfield.setText("");
+                patientLoginTextfield.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Podany login jest już zajęty","Błąd",JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
-        Commons.conn.addUser(imie,nazwisko,login,password);
-        patientFirstNameTextfield.setText("");
-        patientLastNameTextfield.setText("");
-        patientPasswordTextfield.setText("");
-        patientLoginTextfield.setText("");
     }
 
     @FXML
@@ -147,12 +158,22 @@ public class AdminPanelController {
         String login = nurseLoginTextfield.getText();
         String password = nursePasswordTextfield.getText();
 
-        Commons.conn.addNurse(imie,nazwisko,login,password);
+        if(imie.trim().equals("") || nazwisko.trim().equals("") || login.trim().equals("") || password.trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Wartości nie mogą być puste","Błąd",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            if(Commons.conn.checkNurseAvailibility(login.trim(),null)){
+                Commons.conn.addNurse(imie.trim(),nazwisko.trim(),login.trim(),password.trim());
+                nurseFirstNameTextfield.setText("");
+                nurseLastNameTextfield.setText("");
+                nurseLoginTextfield.setText("");
+                nursePasswordTextfield.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Podany login jest już zajęty","Błąd",JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
-        nurseFirstNameTextfield.setText("");
-        nurseLastNameTextfield.setText("");
-        nurseLoginTextfield.setText("");
-        nursePasswordTextfield.setText("");
     }
 
     @FXML

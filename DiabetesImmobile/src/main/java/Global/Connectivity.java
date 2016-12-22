@@ -264,6 +264,29 @@ public class Connectivity {
         return wynik;
     }
 
+    public boolean checkUserAvailibility(String login, Long id) throws IOException {
+        boolean result = true;
+        List<UsersForTable> list = getPatients();
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getLogin().equals(login) && list.get(i).getId()!=id){
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+    public boolean checkNurseAvailibility(String login, Long id) throws IOException {
+        boolean result = true;
+        List<NursesForTable> list = getNurses();
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getLogin().equals(login) && list.get(i).getId()!=id){
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
     public void restart(){
         client.getConnectionManager().shutdown();
         client = HttpClientBuilder.create().build();
