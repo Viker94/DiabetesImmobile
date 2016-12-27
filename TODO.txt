@@ -1,4 +1,3 @@
-
-2) Oprogramowanie interfejsu dla pielêgniarki (interfejs gotowy)
-3) Przegl¹danie z poziomu pielêgniarki danych przypisanych jej pacjentów (interfejs z progress barami i wykresami gotowy, tylko oprogramowaæ)
-4) Poprawki i zabezpieczenia (wywalanie aplikacji przy edycji konta jak sie poda w nazwie polski znak albo spacje itd)
+testowanie
+testowanie
+naprawy bo na pewno coÅ› sie zjebie
