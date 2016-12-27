@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenPatientController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#initialize" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenPatientController">
    <children>
       <TabPane layoutY="69.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <tabs>
-            <Tab text="Wizyty">
+            <Tab onSelectionChanged="#initialize" text="Wizyty">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -32,7 +32,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab text="Limity">
+          <Tab onSelectionChanged="#initialize" text="Limity">
                <content>
                   <Pane>
                      <children>
@@ -62,7 +62,7 @@
                   </Pane>
                </content>
             </Tab>
-            <Tab text="Potas">
+            <Tab onSelectionChanged="#initialize" text="Potas">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -78,7 +78,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Woda">
+            <Tab onSelectionChanged="#initialize" text="Woda">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -94,7 +94,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Sód">
+            <Tab onSelectionChanged="#initialize" text="Sód">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -111,7 +111,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Historia posiłków">
+            <Tab onSelectionChanged="#initialize" text="Historia posiłków">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

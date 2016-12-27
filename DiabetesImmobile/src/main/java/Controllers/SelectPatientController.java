@@ -2,6 +2,7 @@ package Controllers;
 
 import Global.Commons;
 import Model.UsersForTable;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,7 +42,17 @@ public class SelectPatientController {
 
     @FXML
     void initialize() throws IOException {
-        refreshTable();
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                try {
+                    Commons.conn.refreshSingleUser(Commons.getSelectedUser());
+                    Commons.conn.refreshSingleNurse(Commons.getSelectedNurse());
+                    refreshTable();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @FXML

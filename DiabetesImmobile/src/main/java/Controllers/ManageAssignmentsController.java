@@ -2,6 +2,7 @@ package Controllers;
 
 import Global.Commons;
 import Model.UsersForTable;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,8 +49,18 @@ public class ManageAssignmentsController {
 
     @FXML
     public void initialize() throws IOException {
-        firstLastName.setText(Commons.getSelectedNurse().getFirstName()+" "+ Commons.getSelectedNurse().getLastName());
-        refreshTable();
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                try {
+                    Commons.conn.refreshSingleUser(Commons.getSelectedUser());
+                    Commons.conn.refreshSingleNurse(Commons.getSelectedNurse());
+                    firstLastName.setText(Commons.getSelectedNurse().getFirstName()+" "+ Commons.getSelectedNurse().getLastName());
+                    refreshTable();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @FXML

@@ -28,23 +28,59 @@ public class Connectivity {
 
     }
 
-    public User refreshSingleUser(long id) throws IOException {
-        User temp = null;
-        HttpGet getRequest = new HttpGet(                                       //zwraca obiekt Login lub null
-                this.address+"/user/"+id);
-        getRequest.addHeader("accept", "application/json");
-        HttpResponse response = client.execute(getRequest);
+    public void refreshSingleNurse(NursesForTable nurse) throws IOException { //odświeża lokalną kopię pielęgniarki zapisaną w Commons
+        if(nurse!=null){
+            Nurse temp = null;
+            HttpGet getRequest = new HttpGet(                                       //zwraca obiekt Login lub null
+                    this.address + "/nurseLogin/" + nurse.getLogin() + "/" + nurse.getPassword());
+            getRequest.addHeader("accept", "application/json");
+            HttpResponse response = client.execute(getRequest);
 
-        String json = null;
-        BufferedReader br = new BufferedReader(
-                new InputStreamReader((response.getEntity().getContent())));
-        json = br.readLine();
-        if(json!=null){
-            temp = mapper.readValue(json,User.class);
+            String json = null;
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader((response.getEntity().getContent())));
+            json = br.readLine();
+            if (json != null) {
+                temp = mapper.readValue(json, Nurse.class);
+            }
+            restart();
+            nurse.setLastName(temp.getLastName());
+            nurse.setFirstName(temp.getFirstName());
+            nurse.setLogin(temp.getLogin());
+            nurse.setPassword(temp.getPassword());
+            nurse.setLiczbaPacjentow(temp.getPatients().size());
         }
-        restart();
-        return temp;
     }
+
+    public void refreshSingleUser(UsersForTable user) throws IOException { //odświeża lokalną kopię usera zapisaną w Commons
+        if(user!=null) {
+            User temp = null;
+            HttpGet getRequest = new HttpGet(                                       //zwraca obiekt Login lub null
+                    this.address + "/user/" + user.getId());
+            getRequest.addHeader("accept", "application/json");
+            HttpResponse response = client.execute(getRequest);
+
+            String json = null;
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader((response.getEntity().getContent())));
+            json = br.readLine();
+            if (json != null) {
+                temp = mapper.readValue(json, User.class);
+            }
+            restart();
+            user.setNextVisit(temp.getNextVisit());
+            user.setConsumed(temp.getConsumed());
+            user.setFirstName(temp.getFirstName());
+            user.setLastName(temp.getLastName());
+            user.setLimitPotassium(temp.getLimitPotassium());
+            user.setLimitSodium(temp.getLimitSodium());
+            user.setLimitWater(temp.getLimitWater());
+            user.setWater(temp.getWater());
+            user.setSodium(temp.getSodium());
+            user.setPotassium(temp.getPotassium());
+        }
+    }
+
     public void newVisit(long id,Date date) throws IOException {
         String formattedDate = (date.getYear()+1900)+"-"+(date.getMonth()+1)+"-"+date.getDate();
         HttpPost postRequest = new HttpPost(
@@ -137,28 +173,12 @@ public class Connectivity {
             if(nurses.get(i).getAdmin()==false){
                 temp = new NursesForTable(nurses.get(i).getId(),nurses.get(i).getFirstName(),nurses.get(i).getLastName(),
                 nurses.get(i).getLogin(),nurses.get(i).getPassword(),0);
+                temp.setLiczbaPacjentow(nurses.get(i).getPatients().size());
             }
             ret.add(temp);
 
         }
         ret.remove(0);
-        //Przypisywanie liczby pacjentów
-        long id;
-        restart();
-        for(int i=0;i<ret.size();i++){
-            id = ret.get(i).getId();
-            getRequest = new HttpGet(
-                    this.address+"/nurseNumPatients/"+id);
-            getRequest.addHeader("accept", "application/json");
-            response = client.execute(getRequest);
-            br = new BufferedReader(
-                    new InputStreamReader((response.getEntity().getContent())));
-            Size num = mapper.readValue(br.readLine(),Size.class);
-            ret.get(i).setLiczbaPacjentow(num.getSize());
-            restart();
-        }
-
-        /////////////////////////////////
         restart();
         return ret;
     }

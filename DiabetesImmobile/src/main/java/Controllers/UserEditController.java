@@ -1,6 +1,7 @@
 package Controllers;
 
 import Global.Commons;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,20 +33,34 @@ public class UserEditController {
     private TextField userPassword;
 
     @FXML
-    public void initialize() {
-        if(Commons.getUserOrNurse()==1) {
-            userFirstName.setText(Commons.getSelectedUser().getFirstName());
-            userLastName.setText(Commons.getSelectedUser().getLastName());
-            userLogin.setText(Commons.getSelectedUser().getLogin());
-            userPassword.setText(Commons.getSelectedUser().getHaslo());
-            id = Commons.getSelectedUser().getId();
-        }else if(Commons.getUserOrNurse()==2){
-            userFirstName.setText(Commons.getSelectedNurse().getFirstName());
-            userLastName.setText(Commons.getSelectedNurse().getLastName());
-            userLogin.setText(Commons.getSelectedNurse().getLogin());
-            userPassword.setText(Commons.getSelectedNurse().getPassword());
-            id = Commons.getSelectedNurse().getId();
-        }
+    public void initialize() throws IOException {
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                try {
+                    Commons.conn.refreshSingleUser(Commons.getSelectedUser());
+                    Commons.conn.refreshSingleNurse(Commons.getSelectedNurse());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if(Commons.getUserOrNurse()==1) {
+                    userFirstName.setText(Commons.getSelectedUser().getFirstName());
+                    userLastName.setText(Commons.getSelectedUser().getLastName());
+                    userLogin.setText(Commons.getSelectedUser().getLogin());
+                    userPassword.setText(Commons.getSelectedUser().getHaslo());
+                    id = Commons.getSelectedUser().getId();
+                }else if(Commons.getUserOrNurse()==2){
+                    userFirstName.setText(Commons.getSelectedNurse().getFirstName());
+                    userLastName.setText(Commons.getSelectedNurse().getLastName());
+                    userLogin.setText(Commons.getSelectedNurse().getLogin());
+                    userPassword.setText(Commons.getSelectedNurse().getPassword());
+                    id = Commons.getSelectedNurse().getId();
+                }
+            }
+        });
+
+
     }
 
     @FXML

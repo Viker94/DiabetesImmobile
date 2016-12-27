@@ -5,6 +5,7 @@ import Model.Consumption;
 import Model.ConsumptionHistory;
 import Model.User;
 import Model.UsersForTable;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -125,17 +126,27 @@ public class MainScreenPatientController {
     private TableColumn<ConsumptionHistory, String> tabHistoryWater;
 
     @FXML
-    void initialize() {
-        user = Commons.getSelectedUser();
-        refreshLimits();
-        refreshPotassium();
-        refreshSodium();
-        refreshWater();
-        refreshHistory();
-        firstAndLastName.setText(Commons.getImie()+" "+Commons.getNazwisko());
-        patientFirstAndLastName.setText(Commons.getSelectedUser().getFirstName()+" "+Commons.getSelectedUser().getLastName());
-        if(user.getNextVisit()!=null) plannedDateLabel.setText(user.getNextVisit().toString());
-        else plannedDateLabel.setText("Nie ustalono");
+    void initialize() throws IOException {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                try {
+                    Commons.conn.refreshSingleUser(Commons.getSelectedUser());
+                    Commons.conn.refreshSingleNurse(Commons.getSelectedNurse());
+                    user = Commons.getSelectedUser();
+                    refreshLimits();
+                    refreshPotassium();
+                    refreshSodium();
+                    refreshWater();
+                    refreshHistory();
+                    firstAndLastName.setText(Commons.getImie()+" "+Commons.getNazwisko());
+                    patientFirstAndLastName.setText(Commons.getSelectedUser().getFirstName()+" "+Commons.getSelectedUser().getLastName());
+                    if(user.getNextVisit()!=null) plannedDateLabel.setText(user.getNextVisit().toString());
+                    else plannedDateLabel.setText("Nie ustalono");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @FXML
@@ -152,9 +163,7 @@ public class MainScreenPatientController {
     void acceptNewDate() throws IOException {
         Date temp = java.sql.Date.valueOf(newDatePicker.getValue()); //błąd bo retarded środowisko, ale kompiluje sie i działa
         Commons.conn.newVisit(user.getId(), temp);
-        User tmp = Commons.conn.refreshSingleUser(user.getId());
-        Commons.getSelectedUser().setNextVisit(tmp.getNextVisit());
-        user = Commons.getSelectedUser();
+        Commons.conn.refreshSingleUser(Commons.getSelectedUser());
         if(user.getNextVisit()!=null)plannedDateLabel.setText(user.getNextVisit().toString());
         else plannedDateLabel.setText("Nie ustalono");
     }

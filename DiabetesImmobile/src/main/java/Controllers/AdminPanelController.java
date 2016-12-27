@@ -3,6 +3,7 @@ package Controllers;
 import Global.Commons;
 import Model.NursesForTable;
 import Model.UsersForTable;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -107,9 +108,26 @@ public class AdminPanelController {
 
     @FXML
     public void initialize() throws IOException {
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                try {
+                    Commons.conn.refreshSingleUser(Commons.getSelectedUser());
+                    Commons.conn.refreshSingleNurse(Commons.getSelectedNurse());
+                    firstAndLastName.setText(Commons.getImie()+" "+ Commons.getNazwisko());
+                    refreshNursesTable();
+                    refreshPatientsTable();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        /*
+        Commons.conn.refreshSingleUser(Commons.getSelectedUser());
+        Commons.conn.refreshSingleNurse(Commons.getSelectedNurse());
         firstAndLastName.setText(Commons.getImie()+" "+ Commons.getNazwisko());
         refreshNursesTable();
-        refreshPatientsTable();
+        refreshPatientsTable();*/
     }
 
     @FXML
