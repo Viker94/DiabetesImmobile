@@ -134,9 +134,6 @@ public class MainScreenPatientController {
                     Commons.conn.refreshSingleNurse(Commons.getSelectedNurse());
                     user = Commons.getSelectedUser();
                     refreshLimits();
-                    refreshPotassium();
-                    refreshSodium();
-                    refreshWater();
                     refreshHistory();
                     firstAndLastName.setText(Commons.getImie()+" "+Commons.getNazwisko());
                     patientFirstAndLastName.setText(Commons.getSelectedUser().getFirstName()+" "+Commons.getSelectedUser().getLastName());
@@ -215,18 +212,4 @@ public class MainScreenPatientController {
         sodiumBar.setProgress(sodiumPer);
     }
 
-    @FXML
-    void refreshPotassium() {
-
-    }
-
-    @FXML
-    void refreshSodium() {
-
-    }
-
-    @FXML
-    void refreshWater() {
-
-    }
 }

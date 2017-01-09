@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -32,7 +29,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab onSelectionChanged="#initialize" text="Limity">
+          <Tab onSelectionChanged="#refreshLimits" text="Limity">
                <content>
                   <Pane>
                      <children>
@@ -62,56 +59,7 @@
                   </Pane>
                </content>
             </Tab>
-            <Tab onSelectionChanged="#initialize" text="Potas">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <LineChart fx:id="potassiumChart" layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </LineChart>
-                        <Button fx:id="refreshPotassiumButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshPotassium" text="Odśwież" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab onSelectionChanged="#initialize" text="Woda">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <LineChart fx:id="waterChart" layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
-                           <xAxis>
-                              <CategoryAxis side="BOTTOM" />
-                           </xAxis>
-                           <yAxis>
-                              <NumberAxis side="LEFT" />
-                           </yAxis>
-                        </LineChart>
-                        <Button fx:id="refreshWaterButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshWater" text="Odśwież" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab onSelectionChanged="#initialize" text="Sód">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <LineChart fx:id="sodiumChart" layoutX="86.0" layoutY="11.0" prefHeight="280.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
-                           <xAxis>
-                              <CategoryAxis side="BOTTOM" />
-                           </xAxis>
-                           <yAxis>
-                              <NumberAxis side="LEFT" />
-                           </yAxis>
-                        </LineChart>
-                        <Button fx:id="refreshSodiumButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshSodium" text="Odśwież" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab onSelectionChanged="#initialize" text="Historia posiłków">
+            <Tab onSelectionChanged="#refreshHistory" text="Historia posiłków">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
