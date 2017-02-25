@@ -74,6 +74,7 @@
                           </columns>
                         </TableView>
                         <Button fx:id="historyRefreshButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshHistory" text="Odśwież" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                        <Button fx:id="toPdfButton" layoutX="14.0" layoutY="49.0" mnemonicParsing="false" onAction="#saveToPDF" prefHeight="25.0" prefWidth="61.0" text="Do PDF" />
                      </children>
                   </AnchorPane>
               </content>

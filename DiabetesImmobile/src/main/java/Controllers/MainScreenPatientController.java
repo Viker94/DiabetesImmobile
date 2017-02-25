@@ -5,6 +5,8 @@ import Model.Consumption;
 import Model.ConsumptionHistory;
 import Model.User;
 import Model.UsersForTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +15,9 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javax.swing.*;
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -210,6 +215,46 @@ public class MainScreenPatientController {
         potassiumBar.setProgress(potassiumPer);
         waterBar.setProgress(waterPer);
         sodiumBar.setProgress(sodiumPer);
+    }
+
+    @FXML
+    void saveToPDF(){
+        //generowanie raportu jako kodu HTML
+        String html = "<html><h1 align=\"center\">Historia pacjenta</h1>";
+        html += "<h2 align=\"center\">"+user.getFirstName()+" "+user.getLastName()+"</h2>";
+        html += "<h3 align=\"center\">Wygenerowano: "+ LocalDate.now().toString() +"</h3>";
+        html += "<h4 align=\"center\">Przez: "+ Commons.getImie()+" "+Commons.getNazwisko() +"</h4>";
+        html += "<table style=\"width:100%\" border=\"1\" cellpadding=\"3\"><tr><th>Data</th><th>Produkt</th><th>Ilosc</th><th>Z. potasu</th><th>Z. sodu</th><th>Z. wody</th></tr>";
+
+        List<Consumption> cons = Commons.getSelectedUser().getConsumed();
+        Consumption temp;
+        for(int i=0;i<cons.size();i++){
+            temp = cons.get(i);
+            html += "<tr>";
+            html += "<td>"+temp.getDate().toString()+"</td>";
+            html += "<td>"+temp.getProduct().getName()+"</td>";
+            html += "<td>"+temp.getAmount()+"</td>";
+            html += "<td>"+String.format("%.4g%n",temp.getProduct().getPotassium()*temp.getAmount())+" mg</td>";
+            html += "<td>"+String.format("%.4g%n",temp.getProduct().getSodium()*temp.getAmount())+" mg</td>";
+            html += "<td>"+String.format("%.4g%n",temp.getProduct().getWater()*temp.getAmount())+" mg</td>";
+            html += "</tr>";
+        }
+        html += "</table></html>";
+
+        //Zapis kodu HTML jako PDF
+
+        com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
+        try {
+            PdfWriter wr = PdfWriter.getInstance(doc, new FileOutputStream("Historia-"+user.getId()+"-"+LocalDate.now().toString()+".pdf"));
+            doc.open();
+            ByteArrayInputStream is = new ByteArrayInputStream(html.getBytes());
+            XMLWorkerHelper.getInstance().parseXHtml(wr, doc, is);
+            doc.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(null, "Zapisano");
+
     }
 
 }

@@ -16,7 +16,7 @@
       <Button fx:id="logoutButton" layoutX="526.0" layoutY="10.0" mnemonicParsing="false" onAction="#logout" text="Wyloguj" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
       <TabPane layoutY="48.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
         <tabs>
-          <Tab onSelectionChanged="#initialize" text="Pacjenci">
+          <Tab onSelectionChanged="#refreshPatientsTable" text="Pacjenci">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -52,7 +52,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab onSelectionChanged="#initialize" text="Pielęgniarki">
+            <Tab onSelectionChanged="#refreshNursesTable" text="Pielęgniarki">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
